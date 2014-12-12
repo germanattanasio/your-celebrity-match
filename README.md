@@ -1,4 +1,4 @@
-# Celebrities
+# your-celebrity-match
 
 The application uses IBM Watson [User Modeling][um_docs] and Twitter to find the celebrities that are similar to your personality. Twitter is being use to get the tweets for a given handler, the text from those tweets is send to User Modeling, who analyze the text and reply with a personality profile. That profile is compared to celebrity profiles to find the most similar.
 
@@ -62,7 +62,7 @@ This instructions will help you install the celebrities app in your local enviro
 
 1. Update the database with the celebrities by going to:
 
-    http://localhost:3000/celebrities/syncdb
+    `http://localhost:3000/celebrities/syncdb`
 
 
 ## User Modeling Credentials

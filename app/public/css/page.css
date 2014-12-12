@@ -1,0 +1,562 @@
+.page-content img {
+  opacity: 0;
+}
+.page-content img.revealed {
+  opacity: 1;
+}
+
+.alert-info {
+  background-color: #f1f1f2;
+  border: 1px solid #fcb614;
+  color: #404041;
+  border-radius: 0px;
+  margin-bottom: 3rem;
+}
+.alert-info span {
+  font-weight: 600;
+}
+
+.panel-main {
+  padding: .9375rem;
+  border: 1px solid #e6e7e8;
+  border-radius: 8px;
+}
+
+.overlay-screen {
+  background-color: rgba(35,31,32, .92);
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0%;
+  left: 0%;
+  z-index: 11;
+  padding-top: 40px;
+  overflow-y: scroll;
+}
+
+.how-it-worked a.button {
+  border-radius: .35rem;
+  border: 1px solid #f1f1f2;
+  color: #f1f1f2;
+  padding: .25rem .5rem;
+  margin-top: 2.7rem;
+  display: inline-block;
+  text-decoration: none;
+}
+.how-it-worked a.button:hover {
+  background-color: #f1f1f2;
+  color: rgba(35,31,32, .92);
+}
+.how-it-worked h3 {
+  color: #fcb614;
+  font-weight: 600;
+  margin-top: 3rem;
+  margin-bottom: .8rem;
+}
+.how-it-worked p {
+  color: #f1f1f2;
+  font-weight: 600;
+}
+.how-it-worked a {
+  color: #1cc665;
+  text-decoration: underline;
+}
+.how-it-worked a:hover {
+  color: #55F99B;
+}
+
+.page-content {
+  padding: 3.5rem 0rem 3rem;
+}
+
+.avatars-row {
+  margin-top: -37px;
+  margin-bottom: 1.875rem;
+}
+
+.avatar,
+.avatar .second-border,
+.avatar .third-border {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.avatar,
+.avatar .third-border {
+  border-width: 10px;
+  border-style: solid;
+  border-color: #1cc665;
+}
+
+.avatar {
+  max-width: 150px;
+  max-height: 150px;
+  margin: 1px auto;
+  box-shadow: 0px 0px 11px rgba(51, 51, 51, 0.45);
+}
+
+.avatar .second-border {
+  border: 1px solid white;
+}
+
+.avatar img {
+  width: 100%;
+  height: 100%;
+}
+
+.similarity {
+  display: inline-block;
+  margin-top: calc(75px - 1.5rem);
+  position: relative;
+}
+.similarity .similarity-percentage {
+  display: block;
+  background-color: #404041;
+  border-radius: 3px;
+  padding: .3rem .75rem;
+  z-index: 2;
+  position: relative;
+  box-shadow: 0px 0px 11px rgba(51, 51, 51, 0.45);
+}
+.similarity h1 {
+  color: #eabf0a;
+}
+.similarity .left-bar, .similarity .right-bar {
+  width: 250px;
+  height: 28px;
+  background-color: red;
+  position: absolute;
+  top: calc(50% - 14px);
+  z-index: 1;
+}
+.similarity .right-bar {
+  right: 50%;
+  background-color: #1cc665;
+}
+.similarity .left-bar {
+  left: 50%;
+  background-color: #0098ff;
+}
+.similarity .right-bar div, .similarity .left-bar div {
+  height: calc(50% + 1px);
+  width: 100%;
+  border-bottom: 1px solid white;
+}
+
+.similar-to {
+  margin-top: 3px;
+}
+.similar-to span {
+  color: #0098ff;
+}
+
+.me,
+.me .avatar,
+.me .third-border,
+.me .avatar-name,
+.me .avatar-name a {
+  color: #1cc665;
+  border-color: #1cc665;
+  text-decoration: none;
+}
+.me .avatar-name a:hover {
+  text-decoration: underline;
+}
+.me .third-border {
+  background-color: #87E8B1;
+}
+
+.celebrity,
+.celebrity .avatar,
+.celebrity .third-border,
+.celebrity .avatar-name,
+.celebrity .avatar-name a {
+  color: #0098ff;
+  border-color: #0098ff;
+  text-decoration: none;
+}
+.celebrity .avatar-name a:hover {
+  text-decoration: underline;
+}
+.celebrity .third-border {
+  background-color: #76C7FF;
+}
+
+.me, .celebrity {
+  z-index: 2;
+}
+
+.celebrity p, .me p {
+  margin-top: .5rem;
+}
+
+.how-you-match-label {
+  margin-top: 3.1rem;
+
+}
+.how-you-match-label p {
+  text-align: center;
+}
+
+.avatar-small {
+  max-width:  50px;
+  max-height: 50px;
+  width: 100%;
+  height: 100%;
+  margin: 1px auto;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+}
+.avatar-small img {
+  width: 100%;
+  height: 100%;
+}
+.avatar-small .overlay-yellow,
+.avatar-small .overlay-red {
+  height: 100%;
+  position: absolute;
+  width: 100%;
+  top: 0px;
+}
+.avatar-small .overlay-yellow {
+  background-color: rgba(234, 191, 10, 0.52);
+  -webkit-transition: .3s;
+  -moz-transition: .3s;
+  -o-transition: .3s;
+  transition: .3s;
+}
+.avatar-small .overlay-red {
+  background-color: rgba(240, 78, 55, 0.52);
+  -webkit-transition: .3s;
+  -moz-transition: .3s;
+  -o-transition: .3s;
+  transition: .3s;
+}
+.avatar-small .overlay-yellow:hover,
+.avatar-small .overlay-red:hover {
+  background-color: rgba(0, 64, 65, 1);
+}
+.avatar-small .overlay-yellow:active {
+  /*background-color: rgba(234, 191, 10, 1);*/
+  background-color: rgba(0, 152, 255, 1);
+  -webkit-transition: 0s;
+  -moz-transition: 0s;
+  -o-transition: 0s;
+  transition: 0s;
+}
+.avatar-small .overlay-red:active .percentage h4 {
+  text-shadow: none;
+}
+.avatar-small .overlay-red:active {
+  /*background-color: rgba(240, 78, 55, 1);*/
+  background-color: rgba(0, 152, 255, 1);
+  -webkit-transition: 0s;
+  -moz-transition: 0s;
+  -o-transition: 0s;
+  transition: 0s;
+}
+.avatar-small .percentage {
+  position: relative;
+  text-align: center;
+  top: 25px;
+  margin-top: -.5625rem;
+}
+.avatar-small .percentage h4 {
+  color: white;
+  text-shadow: 0px 0px 6px #333;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.trait-row {
+  margin-bottom: 1.25rem;
+}
+
+.trait-row .col-md-6 {
+  padding: 0px;
+}
+
+.measuring-bar {
+  width: 100%;
+  height: .75rem;
+  border-bottom: 1px solid #404041;
+  position: relative;
+}
+
+.point {
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-left: -.625rem;
+  background-color: #1cc665;
+  border-radius: 50%;
+  display: inline-block;
+  position: absolute;
+  bottom: -.625rem;
+  -webkit-transition: .3s;
+  -moz-transition: .3s;
+  -o-transition: .3s;
+  transition: .3s;
+  /*border:1px solid white;*/
+}
+.mep {
+  /* border-color is inherited from .me's color */
+  background-color: #1cc665;
+}
+
+.celebrityp {
+  background-color: #0098ff;
+}
+
+.bigger {
+  z-index: 2;
+  width: 1.75rem;
+  height: 1.75rem;
+  margin-left: -.875rem;
+  bottom: -.875rem;
+}
+.smaller {
+  width: .5rem;
+  height: .5rem;
+  margin-left: -.25rem;
+  bottom: -.25rem;
+  background-color: #d0d2d3;
+}
+
+.more-info {
+  position: absolute;
+  right: 3rem;
+  bottom: .2rem;
+  font-size: .75rem;
+  z-index: 2;
+}
+.more-info a {
+  color: #404041;
+  text-decoration: underline;
+}
+.more-info a:hover {
+  color: #929497;
+}
+
+.social-media {
+  text-align: center;
+  margin-top: 2rem;
+  margin-bottom: calc(-.5rem - 10px - .9375rem);
+}
+.social-media .social-media-buttons {
+  display: inline-block;
+  border: 1px solid #DDD;
+  background-color: white;
+  padding: 0.5rem .65rem;
+}
+.social-media h6 {
+  display: inline-block;
+  float: left;
+  line-height: 20px;
+}
+.social-media .twitter {
+  display: inline-block;
+  width: 76px;
+  position: relative;
+  margin-left: .5rem;
+  float: left;
+}
+
+.your-personality {
+  text-align: center;
+  margin-top: -1.6rem;
+}
+.your-personality .description {
+  display: inline-block;
+  background-color: white;
+  padding-left: .625rem;
+  padding-right: .625rem;
+}
+
+a.tlink {
+  text-decoration: none;
+  color: black;
+}
+
+
+.background-pics {
+  position: fixed;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  right: -49px;
+  bottom: 0;
+  margin:0; padding: 0;
+  list-style-type: none;
+  display: none;
+}
+.background-pics li {
+  display: inline-block;
+  height: 50px;
+  width: 50px;
+  background-size: cover;
+  background-position: center center;
+  margin:0; padding: 0;
+}
+
+.match {
+  background-color: white;
+  max-width: 848px;
+  margin: 60px auto;
+  padding: 0 30px;
+  border-radius: 6px;
+}
+
+.other-celebs{
+  margin-top: 1.375rem;
+}
+.other-celeb {
+  min-height: 80px;
+  margin-bottom: 1.8rem;
+}
+.other-celeb h5 {
+  display: inline-block;
+  margin-top: .4rem;
+  font-weight: 600;
+}
+
+.panel-comparisons {
+  border: 1px solid #a6a8ab;
+  border-radius: 8px;
+}
+.panel-comparisons .panel-body {
+  padding: 1.6875rem .9375rem 0rem;
+}
+.panel-heading {
+  background-color: #404041;
+}
+.panel-heading p {
+  color: #f1f1f2;
+  text-align: center;
+}
+
+.most-similar .panel-heading p span {
+  color: #eabf0a;
+}
+.most-different .panel-heading p span {
+  color: #f04e37;
+}
+
+@media screen and (max-width: 992px) {
+
+  .container > .row {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+
+  .trait-row .col-md-3 {
+    display: inline-block;
+  }
+  .trait-row .col-md-3:nth-of-type(1) {
+    float: left;
+  }
+  .trait-row .col-md-3:nth-of-type(2) {
+    float: right;
+  }
+  .trait-row .col-md-6 {
+    padding-right: 15px;
+    padding-left: 15px;
+    clear: both;
+  }
+
+  .other-celebs .col-md-6 {
+    width: 50%;
+    float: left;
+  }
+}
+@media screen and (max-width: 768px) {
+  .avatars-row > .col-sm-4 {
+    width: 33.33333333%;
+  }
+  .avatars-row {
+    margin-top: 0px;
+  }
+  .similarity .left-bar,
+  .similarity .right-bar {
+    width: 186px;
+  }
+}
+@media screen and (max-width: 620px) {
+  .other-celebs .col-md-6 .col-sm-4 {
+    width: 100%;
+    float: none;
+  }
+}
+@media screen and (max-width: 540px) {
+  .avatar {
+    max-width: 120px;
+    max-height: 120px;
+  }
+  .similarity {
+    margin-top: calc(60px - 1.5rem);
+  }
+  .more-info {
+    position: static;
+    display: block;
+    text-align: center;
+    margin-top: 2rem;
+    font-size: 1rem;
+  }
+  .social-media {
+    margin-top: 1.1rem;
+  }
+}
+@media screen and (max-width: 460px) {
+  .avatar {
+    max-width: 100px;
+    max-height: 100px;
+  }
+  .similarity {
+    margin-top: calc(50px - 1.5rem);
+  }
+  .avatar {
+    border-width: 5px;
+  }
+  .avatar .second-border,
+  .avatar .third-border {
+    border: none;
+  }
+}
+
+@media screen and (max-width: 486px) {
+  .similarity .left-bar,
+  .similarity .right-bar {
+    width: 126px;
+  }
+
+  .avatar {
+    max-width: 100px;
+    max-height: 100px;
+  }
+  .similarity {
+    margin-top: calc(50px - 1.5rem);
+  }
+  .avatar {
+    border-width: 5px;
+  }
+  .avatar .second-border,
+  .avatar .third-border {
+    border: none;
+  }
+}
+
+@media screen and (max-width: 380px) {
+  .avatar {
+    max-width: 80px;
+    max-height: 80px;
+  }
+  .similarity {
+    margin-top: calc(40px - 1.5rem);
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "name": "your-celebrity-match",
+  "version": "1.0.1",
+  "description": "your-celebrity-match uses the User Modeling service to find a celebrity similar to you based off of your online presence",
+  "private": true,
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "body-parser": "1.9.0",
+    "errorhandler": "1.2.2",
+    "express": "4.10.2",
+    "express-favicon": "1.0.1",
+    "extend": "~2.0.0",
+    "jade": "1.7.0",
+    "mongoose": "3.8.18",
+    "morgan": "1.4.1",
+    "q": "1.0.1",
+    "request": "~2.45.0",
+    "twitter": "0.2.13",
+    "winston": "^0.8.3"
+  },
+  "author": "German Attanasio Ruiz <germanatt@us.ibm.com>",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.rtp.raleigh.ibm.com/gattana-us/yourcelebritymatch/issues"
+  },
+  "engines": {
+    "node": "0.10.33"
+  }
+}

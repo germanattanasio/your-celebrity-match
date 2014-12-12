@@ -1,0 +1,10 @@
+extends ./layout.jade
+
+block fork-github
+
+block content
+  h1 Error: #{error.message}
+  if settings['verbose errors']
+    pre= error.stack
+  else
+    p An error ocurred!

@@ -1,0 +1,49 @@
+extends ./layout.jade
+
+block content
+  include ./navbar.jade
+  .container
+    .row
+    if !error
+      if !celebrities
+        .col-md-9
+          form(method='post')
+            h1.cover-heading Get celebrities ids
+            p.lead Write the celebrities you want to include in the database, one per line
+            p.lead
+              .input-group
+                span.input-group-addon
+                textarea.form-control(name='celebrities', required, rows='15').
+                  @katyperry
+                  @justinbieber
+                  @BarackObama
+                  @taylorswift13
+                  @ladygaga
+                  @britneyspears
+            p.lead
+              button.btn.btn-default(type='submit') Add!
+      else
+        .col-md-9
+          h3 Celebrity database updated
+          div
+            div.alert.alert-success #{celebrities.length} celebrities were added/updated into the database
+            table.table.table-condensed.table-hover(data-height='500', data-show-columns="true", data-search='true')
+              thead
+                tr
+                  th name
+                  th(data-visible="false") screen name
+                  th id
+                  //th(data-visible="false") verified
+                  //th(data-visible="false") followers
+                  //th(data-visible="false") tweets
+                each c, index in celebrities
+                  tr
+                    td #{c.name}
+                    td #{c.screen_name}
+                    td #{c.id}
+                    //td #{c.verified}
+                    //td #{c.followers}
+                    //td #{c.tweets}
+    else
+      .col-md-9
+        p Error: #{error}

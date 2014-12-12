@@ -1,0 +1,17 @@
+extends ./layout.jade
+
+block fork-github
+
+block content
+  div.container
+    div.row
+      div.col-md-12
+        div.error-template
+          h1 Oops!
+          h2 404 Not Found
+          div.error-details Requested page not found!
+          p
+            strong URL:
+            |  #{url}
+          div.error-actions
+            a(href='/') Take me home

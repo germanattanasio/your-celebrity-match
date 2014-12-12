@@ -1,0 +1,85 @@
+extends ./layout.jade
+
+block extra-header
+  link(rel="stylesheet", href="/css/index.css")
+
+block content
+  .container
+    .row
+      .col-md-8.col-md-push-2
+        .img-container.main-logo
+          img(src="/images/logo-lg.svg")
+
+    .row.sub-text
+      .col-md-12
+        h4
+          | Enter your Twitter handle to see which celebrities have the most similar (and different) personalities to yours!
+    form(method='post', action='/')
+      .row.twitter-submission
+        .col-md-12
+            span.h3 @
+            input.paragraph.form-control(type='text', value='#{user ? user.screen_name : "" }', name='username', placeholder='your twitter handle...', required)
+            button.button.h4(type='submit') Match me!
+    if error
+      .row
+        .col-md-12
+          div(role='alert').alert
+            h3 Error
+            p #{error}
+    if warning
+      .row
+        .col-md-12
+          div(role='alert').alert
+            h3 Warning!
+            p #{warning}
+    if info
+      .row
+        .col-md-12
+          div(role='alert').alert
+            p #{info}
+    .row.extra-links
+      .col-md-12
+        p.text-center
+          a(href='http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/') Built with IBM Watson
+    .row.extra-links
+      .col-md-12
+        p.text-center
+          a(href='/tos') Terms of use
+          |  | 
+          a(href='http://www.ibm.com/privacy/us/en/') Privacy Policy
+
+    - var styles = ["left: 2rem; top: 1rem; width: 2rem; height: 2rem;"]
+    - styles.push("left: 2rem; top: 6rem; width: 5rem; height: 5rem;")
+    - styles.push("left: 7rem; top: 2.3rem; width: 3rem; height: 3rem;")
+    - styles.push("left: 6.5rem; top: 12rem; width: 6rem; height: 6rem;")
+    - styles.push("left: 11rem; top: 2.3rem; width: 10rem; height: 10rem;")
+    - styles.push("left: 17rem; top: 14rem; width: 5rem; height: 5rem;")
+    - styles.push("left: 23rem; top: 8rem; width: 8rem; height: 8rem;")
+    - styles.push("left: 25rem; top: 0rem; width: 6rem; height: 6rem;")
+    - styles.push("left: 32rem; top: 6rem; width: 3rem; height: 3rem;")
+    - styles.push("left: 33rem; top: 12rem; width: 9rem; height: 9rem;")
+    - styles.push("left: 35rem; top: 0rem; width: 4rem; height: 4rem;")
+    - styles.push("left: 38rem; top: 5rem; width: 6rem; height: 6rem;")
+    - styles.push("left: 45rem; top: 10rem; width: 6rem; height: 6rem;")
+    - styles.push("left: 45rem; top: 0rem; width: 8rem; height: 8rem;")
+    - styles.push("left: 54rem; top: 14rem; width: 5rem; height: 5rem;")
+    - styles.push("left: 55rem; top: 6rem; width: 7rem; height: 7rem;")
+    - styles.push("left: 57rem; top: 0rem; width: 4rem; height: 4rem;")
+    - styles.push("left: 63rem; top: 3rem; width: 5rem; height: 5rem;")
+    - styles.push("left: 62rem; top: 13rem; width: 6rem; height: 6rem;")
+    - styles.push("left: 66rem; top: 9.5rem; width: 2rem; height: 2rem;")
+    - styles.push("left: 70rem; top: 3rem; width: 6rem; height: 6rem;")
+    - styles.push("left: 72rem; top: 11rem; width: 4rem; height: 4rem;")
+    - styles.push("left: 77rem; top: 6rem; width: 6rem; height: 6rem;")
+    .celebrities
+      .centered-container
+        each style, index in styles
+          .celeb-img.shrinked.img-container(style=style)
+            img(src=pics[index].image.replace("_normal","_400x400"), title=pics[index].username)
+
+// No footer on this page
+block footer
+
+block extra-scripts
+  script(type="text/javascript", src="/js/index-page.js")
+

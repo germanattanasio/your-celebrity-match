@@ -1,0 +1,157 @@
+html, body {
+  overflow-x: hidden;
+}
+body {
+  background-color: #231f20;
+  color: #d0d2d3;
+  max-height: 100%;
+}
+
+form {
+  margin: 0rem;
+}
+
+a, a:link, a:visited {
+  color: #929497;
+}
+a:hover, a:focus {
+  color: #D0D2D3;
+}
+
+#wrap {
+  position: static;
+}
+
+.container {
+  padding-top: 5rem;
+}
+
+.sub-text {
+  font-weight: 600;
+}
+
+.img-container img {
+  width: 100%;
+  height: auto;
+}
+
+.img-container.main-logo {
+  width: 100%;
+}
+
+.sub-text h4 {
+  text-align: center;
+  width: 100%;
+  max-width: 27rem;
+  margin: 0px auto;
+}
+
+.twitter-submission {
+  text-align: center;
+  margin-top: 1rem;
+}
+.twitter-submission > .col-md-12 > * {
+  display: inline-block;
+}
+.twitter-submission span {
+  font-weight: 700;
+  color: #1cc665;
+}
+.twitter-submission button.button {
+  border-radius: .2rem;
+  border: 1px solid #1cc665;
+  color: #ffffff;
+  background-color: #1cc665;
+  padding: .8rem 1rem;
+  margin-top: 0rem;
+  display: inline-block;
+  text-decoration: none;
+  font-weight: 700;
+}
+.twitter-submission button.button:hover {
+  background-color: #76E4A5;
+  border-color: #76E4A5;
+}
+.twitter-submission input {
+  color: #1cc665;
+  width: auto;
+  border-radius: 0px;
+  margin: 0px .6rem;
+  height: 2.6rem;
+}
+.twitter-submission .form-control:focus {
+  border-color: #1cc665;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(28,198,101,.8);
+}
+.twitter-submission input::-webkit-input-placeholder { color: #b3b3b3; }
+.twitter-submission input:-moz-input-placeholder { color: #b3b3b3; }
+.twitter-submission input:-webkit-input-placeholder { color: #b3b3b3; }
+.twitter-submission input:-moz-input-placeholder { color: #b3b3b3; }
+.twitter-submission input:-ms-input-placeholder { color: #b3b3b3; }
+
+.alert {
+  text-align: center;
+  margin: 0px;
+}
+.alert p {
+  color: #f04e37;
+  margin: 0px auto;
+}
+
+.extra-links {
+  text-align: center;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.celebrities {
+  width: 100%;
+  height: 21.875rem;
+  position: absolute;
+  left: 0rem;
+  text-align: center;
+  overflow: hidden;
+}
+.celebrities .centered-container {
+  display: inline-block;
+  width: 85rem;
+  height: 100%;
+  position: relative;
+  margin: auto;
+  left: -9999px;
+  right: -9999px;
+  position: absolute;
+}
+.shrinked {
+  -webkit-transform: scale(0) rotateZ(-30deg);
+  -moz-transform: scale(0) rotateZ(-30deg);
+  -o-transform: scale(0) rotateZ(-30deg);
+  transform: scale(0) rotateZ(-30deg);
+}
+.expanded {
+  -webkit-transform: scale(1) rotateZ(0deg) translateZ(0px);
+  -moz-transform: scale(1) rotateZ(0deg) translateZ(0px);
+  -o-transform: scale(1) rotateZ(0deg) translateZ(0px);
+  transform: scale(1) rotateZ(0deg) translateZ(0px);
+}
+.celebrities .celeb-img {
+  border-radius: 50%;
+  position: absolute;
+  overflow: hidden;
+  -webkit-transition: .4s;
+  -moz-transition: .4s;
+  -o-transition: .4s;
+  transition: .4s;
+}
+
+
+/**
+* Media Queries
+*/
+@media screen and (max-width: 375px) {
+  /* adding top margin to button when it collapses to next line */
+  .twitter-submission button.button {
+    margin-top: 1rem;
+  }
+}

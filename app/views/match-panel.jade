@@ -1,0 +1,56 @@
+
+- var traits = [['Cautious','Curious'],['Organized','Easy Going'],['Outgoing','Reserved'],['Sensitive','Confident'],['Compassionate','Analytical']]
+	div.your-personality
+		div.description
+			p
+				span.me #{user.name}
+				| , your Twitter personality is...
+	.row.avatars-row
+		.col-sm-4.col-xs-12.me
+			div.avatar.text-right.img-circle
+				div.second-border.img-circle
+					div.third-border.img-circle
+						img.me(src='#{user.image.replace("_normal","_400x400")}')
+			div.text-center
+				p.avatar-name
+					a(href="https://twitter.com/#{user.username}") @#{user.username}
+		.col-sm-4.text-center.col-xs-12
+			div.similarity
+				div.left-bar
+					div
+				div.right-bar
+					div
+				div.similarity-percentage
+					h1.cel_distance
+			h4.similar-to
+				| similar to
+				br
+				span.cel_name
+		.col-sm-4.col-xs-12.celebrity
+			div.avatar.text-right.img-circle
+				div.second-border.img-circle
+					div.third-border.img-circle
+						img.cel_image.celebrity
+			div.text-center
+				p.avatar-name
+					a.cel_username
+each trait, i in traits
+	.row.trait-row
+		.col-md-3
+			p.text-right #{trait[0]}
+		.col-md-3.col-md-push-6
+			p.text-left #{trait[1]}
+		.col-md-6.col-md-pull-3
+			div.measuring-bar
+				div.point.mep(style='left:calc(#{user_profile[i].value * 100 }%)')
+				div.point.celebrityp(id='trait_#{i}')
+div.more-info
+	a.how-it-works-link(href="javascript:void(0);") How'd we get this?
+div.social-media
+	div.social-media-buttons
+		h6 Share this result:
+		div.twitter
+			a.twitter-share-button(href="https://twitter.com/share", data-text="#{user.name}'s personality is #{Math.round(similar_celebs[0].distance * 100)}% similar to #{similar_celebs[0].user.name}'s! #CelebMatch #IBMWatson", data-hashtags="UserModeling")
+				| Tweet
+				//td(style='padding-right: 10px;')
+				//  div.fb-share-button(data-href="#", data-layout="button_count")

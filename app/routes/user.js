@@ -209,7 +209,7 @@ router.get('/like/:username', function(req, res) {
 
 router.get('/syncdb', function (req, res) {
   logger.info('remove users from database');
-  var removeAll = Q.nfbind(User.remove.bind(Profile));
+  var removeAll = Q.nfbind(User.remove.bind(User));
 
   removeAll({}).then(function(){
     res.redirect('/');

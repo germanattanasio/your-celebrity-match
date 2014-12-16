@@ -67,7 +67,7 @@ block content
                         h4 #{Math.round(c.distance * 100)}%
                     img(title='Compare me to #{c.user.name}', alt='#{c.user.name} picture', src='#{c.user.image}',id='s_#{index}')
                   h5
-                    a.tlink(href='http://twitter.com/#{c.user.username}') #{c.user.name}
+                    h5 #{c.user.name}
       .col-md-6.most-different
         .panel-comparisons
           .panel-heading

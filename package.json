@@ -20,10 +20,20 @@
     "twitter": "0.2.13",
     "winston": "^0.8.3"
   },
-  "author": "German Attanasio Ruiz <germanatt@us.ibm.com>",
+  "author": "IBM Corp.",
+  "contributors": [
+    {
+      "name": "German Attanasio Ruiz",
+      "email": "germanatt@us.ibm.com"
+    },
+    {
+      "name": "Jeff Stylos",
+      "email": "jsstylos@us.ibm.com"
+    }
+  ],
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.rtp.raleigh.ibm.com/gattana-us/yourcelebritymatch/issues"
+    "url": "https://github.com/watson-developer-cloud/yourcelebritymatch/issues"
   },
   "engines": {
     "node": "0.10.33"

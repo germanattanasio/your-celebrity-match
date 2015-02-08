@@ -43,17 +43,17 @@ This instructions will help you install the celebrities app in your local enviro
         password: '<password>'
       },
 
-      twitter: {
+      twitter: [{
         consumer_key:       '<consumer_key>',
         consumer_secret:    '<consumer_secret>',
         access_token_key:   '<access_token_key>',
         access_token_secret:'<access_token_secret>'
-      }
+      }]
     }
     ```
     Instructions on how to create an app and get User Modeling credentials [here][um_cred].
 
-    Instructions on how to create an app and get Twitter credentials [here][twitter_app].
+    Instructions on how to create an app and get Twitter credentials [here][twitter_app](you can use more than one Twitter app ;-) ).
 1. Start the app
 
     ```sh
@@ -86,7 +86,7 @@ Example output:
           "username": "<username>"
         },
       "label": "user_modeling",
-      "name": "um-service",
+      "name": "user-modeling-service",
       "plan": "user_modeling_free_plan"
    }]
   }

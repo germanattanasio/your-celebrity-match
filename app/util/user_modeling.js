@@ -23,9 +23,10 @@ var request = require('request');
  */
 function formatErrorIfExists(cb) {
   return function(error, response, body) {
+
     // If we have an error return it.
-    if (error || !body) {
-      cb(error, body);
+    if (error) {
+      cb(error, body, response);
       return;
     }
 
@@ -42,9 +43,11 @@ function formatErrorIfExists(cb) {
     // If we still don't have an error and there was an error...
     if (!error && (response.statusCode < 200 || response.statusCode >= 300)) {
       error = { code: response.statusCode, error: body };
+      if (error.code === 401 || error.code === 403)
+        error.error= 'Unauthorized: Access is denied due to invalid credentials';
       body = null;
     }
-    cb(error, body);
+    cb(error, body, response);
   };
 }
 

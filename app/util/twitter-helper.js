@@ -27,9 +27,23 @@ var MAX_COUNT = 200;
  * @param {Object} config configuration file that has the
  * app credentials.
  */
-function TwitterHelper(config) {
-  this.twit = new twitter(config);
+function TwitterHelper(configs) {
+  this.count = 0;
+  this.twit = [];
+  var self = this;
+
+  configs.forEach(function(config){
+    self.twit.push(new twitter(config));
+  });
 }
+
+TwitterHelper.prototype.getInstance = function() {
+  var instance = this.count % this.twit.length;
+  this.count ++;
+
+  logger.info('instance',instance);
+  return this.twit[instance];
+};
 
 /**
  * @return {boolean} True if tweet is not a re-tweet or not in english
@@ -67,12 +81,12 @@ TwitterHelper.prototype.getTweets = function(screen_name, callback) {
     logger.info(screen_name,'_tweets.count:',tweets.length);
     if (_tweets.length > 1) {
       params.max_id = _tweets[_tweets.length-1].id - 1;
-      self.twit.getUserTimeline(params, processTweets);
+      self.getInstance().getUserTimeline(params, processTweets);
     } else {
        callback(null, tweets);
     }
   };
-  self.twit.getUserTimeline(params, processTweets);
+  self.getInstance().getUserTimeline(params, processTweets);
 };
 
 /**
@@ -82,7 +96,7 @@ TwitterHelper.prototype.getTweets = function(screen_name, callback) {
 TwitterHelper.prototype.getUsers = function(params, callback) {
   logger.info('getUsers:', params);
 
-  this.twit.post('/users/lookup.json',params,function(tw_users) {
+  this.getInstance().post('/users/lookup.json',params,function(tw_users) {
     if (tw_users.statusCode){
       logger.info('error getting the twitter users');
       callback(tw_users);
@@ -95,7 +109,7 @@ TwitterHelper.prototype.getUsers = function(params, callback) {
  * Show Twitter user information based on screen_name
  */
 TwitterHelper.prototype.showUser = function(screen_name, callback) {
-  this.twit.showUser(screen_name, function(user){
+  this.getInstance().showUser(screen_name, function(user){
     if (user.statusCode){
       logger.info(screen_name, 'is not a valid twitter');
       callback(user);

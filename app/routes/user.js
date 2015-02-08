@@ -43,11 +43,10 @@ function updateBackground() {
       };
     });
 
-    // // On my (fairly large) screen, I was able to see 1325 images (
-    // at 50x50px) with chrome maximized
-    // while(images.length > 0 && images.length < 1325) {
-    //   images = images.concat(images); // note: this grows exponentially
-    // }
+    // make sure we have at least 24 pictures by concatenating them.
+    while(images.length > 0 && images.length < 24) {
+      images = images.concat(images); // note: this grows exponentially
+    }
     pics = shuffle(images);
   });
 }
@@ -172,8 +171,8 @@ router.get('/like/@:username', function (req, res) {
       return ret;
     });
   })
-  .fail(function (error) {
-    logger.error('fail():',error);
+  .catch(function (error) {
+    logger.error('catch():',error);
     var ret = {pics:pics, user: {screen_name:username}};
     var status = 500;
     if (error.statusCode === 429)

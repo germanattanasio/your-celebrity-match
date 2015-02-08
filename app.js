@@ -6,7 +6,7 @@ var express     = require('express'),
   config        = require('./config/config'),
   mongoose      = require('mongoose'),
   UserModeling  = require('./app/util/user_modeling'),
-  twitterHelper = require('./app/util/twitter-helper'),
+  TwitterHelper = require('./app/util/twitter-helper'),
   logger        = require('./config/logger');
 
 
@@ -38,7 +38,7 @@ mongoose.connection.on('open',
 require('./config/express')(app);
 
 // Create the twitter helper
-var twit = new twitterHelper(config.services.twitter);
+var twit = new TwitterHelper(config.services.twitter);
 
 // Create the user modeling service
 var user_modeling = new UserModeling(config.services.user_modeling);

@@ -17,7 +17,7 @@
 
 var util  = require('util'),
   twitter = require('twitter'),
-  um_util = require('../util/user-modeling-helper'),
+  pi_util = require('../util/util'),
   logger  = require('../../config/logger');
 
 var MAX_COUNT = 200;
@@ -75,7 +75,7 @@ TwitterHelper.prototype.getTweets = function(screen_name, callback) {
 
     var items = _tweets
     .filter(englishAndNoRetweet)
-    .map(um_util.toContentItem);
+    .map(pi_util.toContentItem);
 
     tweets = tweets.concat(items);
     logger.info(screen_name,'_tweets.count:',tweets.length);
@@ -101,7 +101,7 @@ TwitterHelper.prototype.getUsers = function(params, callback) {
       logger.info('error getting the twitter users');
       callback(tw_users);
     } else
-      callback(null, tw_users.map(um_util.toAppUser.bind(um_util)));
+      callback(null, tw_users.map(pi_util.toAppUser.bind(pi_util)));
   });
 };
 
@@ -114,7 +114,7 @@ TwitterHelper.prototype.showUser = function(screen_name, callback) {
       logger.info(screen_name, 'is not a valid twitter');
       callback(user);
     } else
-      callback(null, um_util.toAppUser(user));
+      callback(null, pi_util.toAppUser(user));
   });
 };
 

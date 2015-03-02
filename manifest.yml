@@ -1,8 +1,8 @@
 applications:
 - services:
-  - um-service
+  - personality-insights-service
   - mongodb
   name: your-celebrity-match
   command: node app.js
   path: .
-  memory: 256M
+  memory: 512M

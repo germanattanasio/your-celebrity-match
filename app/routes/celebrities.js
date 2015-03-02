@@ -17,17 +17,17 @@
 
 var router = require('express').Router(),
   mongoose = require('mongoose'),
-  fs = require('fs'),
-  Q = require('q'),
+  fs       = require('fs'),
+  Q        = require('q'),
   Profile  = mongoose.model('Profile'),
-  User  = mongoose.model('User'),
-  logger  = require('../../config/logger');
+  User     = mongoose.model('User'),
+  logger   = require('../../config/logger');
 
 
 /**
  * Render the celebrity list
 */
-router.get('/', function(req,res) {
+router.get('/secret', function(req,res) {
   Profile.find({},function(err,profiles){
     if (err)
       res.render('celebrities',{error: err});
@@ -39,7 +39,7 @@ router.get('/', function(req,res) {
 /**
  * Render the celebrity list
 */
-router.get('/users', function(req,res) {
+router.get('/secret/users', function(req,res) {
   User.find({},function(err,profiles){
     if (err)
       res.render('celebrities',{error: err});
@@ -60,7 +60,7 @@ var jsonProfiles = function(text) {
 /**
  * Validate twitter usernames
 */
-router.get('/syncdb', function (req, res) {
+router.get('/secret/syncdb', function (req, res) {
   logger.info('update celebrity database');
   var removeAll = Q.nfbind(Profile.remove.bind(Profile)),
     getFiles = Q.denodeify(fs.readdir),
@@ -102,7 +102,7 @@ router.get('/syncdb', function (req, res) {
       }));
   })
   .then(function(){
-    res.redirect('/celebrities');
+    res.redirect('/celebrities/secret');
   })
   .fail(function (error) {
     logger.error(error);

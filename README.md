@@ -1,6 +1,6 @@
 # your-celebrity-match
 
-The application uses IBM Watson [User Modeling][um_docs] and Twitter to find the celebrities that are similar to your personality. Twitter is being use to get the tweets for a given handler, the text from those tweets is send to User Modeling, who analyze the text and reply with a personality profile. That profile is compared to celebrity profiles to find the most similar.
+The application uses IBM Watson [Personality Insights][pi_docs] and Twitter to find the celebrities that are similar to your personality. Twitter is being use to get the tweets for a given handler, the text from those tweets is send to Personality Insights, who analyze the text and reply with a personality profile. That profile is compared to celebrity profiles to find the most similar.
 
 The application is running in [Bluemix][bluemix].
 
@@ -34,10 +34,10 @@ This instructions will help you install the celebrities app in your local enviro
     ```
     (Run this in a separate terminal window)
 
-1. Update the Twitter and User Modeling credentials in `config/config.js`
+1. Update the Twitter and Personality Insights credentials in `config/config.js`
     ```js
     {
-      user_modeling: {
+      personality_insights: {
         url:      '<url>',
         username: '<username>',
         password: '<password>'
@@ -51,7 +51,7 @@ This instructions will help you install the celebrities app in your local enviro
       }]
     }
     ```
-    Instructions on how to create an app and get User Modeling credentials [here][um_cred].
+    Instructions on how to create an app and get Personality Insights credentials [here][um_cred].
 
     Instructions on how to create an app and get Twitter credentials [here][twitter_app](you can use more than one Twitter app ;-) ).
 1. Start the app
@@ -65,7 +65,7 @@ This instructions will help you install the celebrities app in your local enviro
     `http://localhost:3000/celebrities/syncdb`
 
 
-## User Modeling Credentials
+## Personality Insights Credentials
 The credentials for the services are stored in the [VCAP_SERVICES][vcap_environment] environment variable. In order to get them you need to first create and bind the service to your application.
 
 There are two ways to get the credentials, you can use Bluemix to access your app and view the `VCAP_SERVICES` there or you can run:
@@ -79,15 +79,15 @@ Example output:
   System-Provided:
   {
   "VCAP_SERVICES": {
-    "user_modeling": [{
+    "personality_insights": [{
         "credentials": {
           "password": "<password>",
           "url": "<url>",
           "username": "<username>"
         },
-      "label": "user_modeling",
-      "name": "user-modeling-service",
-      "plan": "user_modeling_free_plan"
+      "label": "personality_insights",
+      "name": "personality-insights-service",
+      "plan": "IBM Watson Personality Insights Monthly Plan"
    }]
   }
   }
@@ -98,7 +98,7 @@ You need to copy `username`, `password`.
 ## Celebrities
   The application comes with two profiles: [@germanatt][german_twitter] and [@nfriedly][nathan_twitter]. If you want to add more profiles you will have to:
   1. Choose a person to include as 'celebrity'. You need at least 100 different words writted by that person, blog posts, tweets, text messages, emails will work.
-  1. Get the profile by using the [User Modeling][um_docs] service with the text you have and save the json profile in the `profiles` folder. Make sure the file has the `.json` extension as in the examples provided.
+  1. Get the profile by using the [Personality Insights][pi_docs] service with the text you have and save the json profile in the `profiles` folder. Make sure the file has the `.json` extension as in the examples provided.
   1. Start the app and go to: `http://localhost:3000/celebrities/syncdb`. It will repopulate the application database and add the new profile.
 
 ## License
@@ -120,4 +120,4 @@ You need to copy `username`, `password`.
 [twitter_app]: https://apps.twitter.com/app/new
 [german_twitter]: https://twitter.com/germanatt
 [nathan_twitter]: https://twitter.com/nfriedly
-[um_docs]: http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/systemuapi/
+[pi_docs]: http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/personality-insights/

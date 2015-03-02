@@ -2,14 +2,14 @@
 
 /**
  * if VCAP_SERVICES exists then it return the username, password and url for
- * a service that stars with 'name' or {} otherwise
+ * a service that starts with 'name' or {} otherwise
  * @param  String name The service name
  * @return [Object] the service credentials or {} if
  * name is not found in VCAP_SERVICES
  */
 var logger = require('./logger');
 
-module.exports.serviceStarsWith = function(name) {
+module.exports.serviceStartsWith = function(name) {
     if (process.env.VCAP_SERVICES) {
         console.info('Parsing VCAP_SERVICES');
         var services = JSON.parse(process.env.VCAP_SERVICES);

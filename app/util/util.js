@@ -15,7 +15,7 @@
 
 'use strict';
 
-var flatten    = require('./flatten'),
+var flatten  = require('./flatten'),
   similarity = require('./similarity');
 
 

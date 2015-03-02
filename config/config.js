@@ -2,18 +2,22 @@
 
 var logger = require('./logger'),
   bluemix  = require('./bluemix'),
- env       = process.env.VCAP_SERVICES ? 'prod' : 'dev';
+  extend   = require('extend'),
+  env      = process.env.VCAP_SERVICES ? 'prod' : 'dev';
 
 var services = {
   mongodb: 'mongodb://localhost/celebs',
 
-  user_modeling: {
+  personality_insights: {
     url:      '<url>',
     username: '<username>',
-    password: '<password>'
+    password: '<password>',
+    version: 'v2'
   },
 
-  twitter: [{
+  twitter: [
+  // Twitter app credentials: https://apps.twitter.com/app
+  {
     consumer_key:       '<consumer_key>',
     consumer_secret:    '<consumer_secret>',
     access_token_key:   '<access_token_key>',
@@ -25,15 +29,14 @@ var services = {
 // Get the service
 if (env === 'prod') {
   services.mongodb = bluemix.serviceStarsWith('mongodb').url;
-  services.user_modeling = bluemix.serviceStarsWith('user_modeling');
+  services.personality_insights = extend({'version':'v2'}, bluemix.serviceStartsWith('personality_insights'));
 }
 
 logger.info('mongodb:',services.mongodb);
-logger.info('user_modeling:',services.user_modeling);
+logger.info('personality_insights:',services.user_modeling);
 
 module.exports = {
     services: services,
     host: '127.0.0.1',
     port: 3000
 };
-

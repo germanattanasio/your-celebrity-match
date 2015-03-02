@@ -12,10 +12,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+/*global $:false */
 
-$(".celeb-img img").on("load", function() {
-	$(this).parent().removeClass("shrinked");
-	$(this).parent().addClass("expanded");
+'use strict';
+
+$('.celeb-img img').on('load', function() {
+	$(this).parent().removeClass('shrinked');
+	$(this).parent().addClass('expanded');
 }).each(function() {
 	if (this.complete) {
 		$(this).load();

@@ -23,7 +23,7 @@ var router   = require('express').Router(),
   User       = mongoose.model('User'),
   logger     = require('../../config/logger'),
   extend     = require('extend'),
-  util       = require('../util/user-modeling-helper');
+  util       = require('../util/util');
 
 // We're only going to hit the db once for these
 var pics = [];
@@ -89,23 +89,23 @@ router.post('/', function(req, res) {
 
 /**
  * Retrieve tweets from a given username and analyze them
- * by using the user modeling service
+ * by using the personality insights service
 */
 router.get('/like/@:username', function (req, res) {
   var username = req.params.username;
   if (!username)
     return res.render('index', {info: 'You need to provide a username.',pics:pics});
 
-  // Declare some promises to handle database/twitter and user_modeling req
+  // Declare some promises to handle database/twitter and personality_insights req
   var showUser   = Q.denodeify(req.twit.showUser.bind(req.twit)),
     getTweets  = Q.denodeify(req.twit.getTweets.bind(req.twit)),
-    getProfile = Q.denodeify(req.user_modeling.profile.bind(req.user_modeling)),
+    getProfile = Q.denodeify(req.personality_insights.profile.bind(req.personality_insights)),
     getUserFromDB = Q.denodeify(User.findOne.bind(User)),
     saveUserInDB = Q.denodeify(User.createOrUpdate.bind(User));
 
   showUser(username)
   .then(function(user) {
-    logger.info('username:',username);
+    logger.info('username:', username);
 
     if (!user)
       return;
@@ -134,7 +134,7 @@ router.get('/like/@:username', function (req, res) {
                 .then(function(profile) {
                   if (!profile)
                     return;
-                  logger.info(username, 'analyze with user modeling');
+                  logger.info(username, 'analyze with personality insights');
 
                   logger.info(username, 'added to the database');
                   user.profile = JSON.stringify(profile);

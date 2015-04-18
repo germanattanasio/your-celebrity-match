@@ -33,7 +33,7 @@ if (env === 'prod') {
 }
 
 logger.info('mongodb:',services.mongodb);
-logger.info('personality_insights:',services.user_modeling);
+logger.info('personality_insights:',services.personality_insights);
 
 module.exports = {
     services: services,

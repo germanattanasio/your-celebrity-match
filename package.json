@@ -37,6 +37,6 @@
     "url": "https://github.com/watson-developer-cloud/yourcelebritymatch/issues"
   },
   "engines": {
-    "node": "0.10.33"
+    "node": ">=0.10.36"
   }
 }

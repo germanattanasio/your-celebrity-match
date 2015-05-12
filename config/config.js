@@ -28,7 +28,7 @@ var services = {
 
 // Get the service
 if (env === 'prod') {
-  services.mongodb = bluemix.serviceStarsWith('mongodb').url;
+  services.mongodb = bluemix.serviceStartsWith('mongodb').url;
   services.personality_insights = extend({'version':'v2'}, bluemix.serviceStartsWith('personality_insights'));
 }
 

@@ -1,3 +1,9 @@
+---
+declared-services:
+  personality-insights-service-standard:
+    label: personality_insights
+    plan: standard
+
 applications:
 - services:
   - personality-insights-service
@@ -5,4 +11,4 @@ applications:
   name: your-celebrity-match
   command: node app.js
   path: .
-  memory: 512M
+  memory: 768M

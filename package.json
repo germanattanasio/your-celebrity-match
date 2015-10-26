@@ -17,7 +17,7 @@
     "morgan": "~1.5.1",
     "q": "~2.0.3",
     "request": "~2.53.0",
-    "twitter": "~0.2.13",
+    "twitter": "~1.2.5",
     "watson-developer-cloud": "~0.9.3",
     "winston": "~0.9.0"
   },

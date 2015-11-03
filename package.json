@@ -19,7 +19,7 @@
     "request": "~2.53.0",
     "twitter": "~0.2.13",
     "watson-developer-cloud": "~0.9.3",
-    "winston": "~2.0.0"
+    "winston": "~2.0.1"
   },
   "author": "IBM Corp.",
   "contributors": [

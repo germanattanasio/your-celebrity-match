@@ -13,7 +13,7 @@
     "express-favicon": "~1.0.1",
     "extend": "~2.0.0",
     "jade": "~1.9.2",
-    "mongoose": "^4.2.3",
+    "mongoose": "^4.2.4",
     "morgan": "~1.5.1",
     "q": "~2.0.3",
     "request": "~2.53.0",

@@ -16,7 +16,7 @@
     "mongoose": "^4.3.6",
     "morgan": "~1.5.1",
     "q": "~2.0.3",
-    "request": "~2.67.0",
+    "request": "~2.68.0",
     "twitter": "~0.2.13",
     "watson-developer-cloud": "~1.0.6",
     "winston": "~2.1.1"

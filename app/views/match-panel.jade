@@ -13,7 +13,7 @@
 						img.me(src='#{user.image.replace("_normal","_400x400")}')
 			div.text-center
 				p.avatar-name
-					a(href="https://twitter.com/#{user.username}") @#{user.username}
+					a(href='https://twitter.com/#{user.username}') @#{user.username}
 		.col-sm-4.text-center.col-xs-12
 			div.similarity
 				div.left-bar
@@ -45,12 +45,10 @@ each trait, i in traits
 				div.point.mep(style='left:calc(#{user_profile[i].value * 100 }%)')
 				div.point.celebrityp(id='trait_#{i}')
 div.more-info
-	a.how-it-works-link(href="javascript:void(0);") How'd we get this?
+	a.how-it-works-link(href='javascript:void(0);') How'd we get this?
 div.social-media
 	div.social-media-buttons
 		h6 Share this result:
 		div.twitter
-			a.twitter-share-button(href="https://twitter.com/share", data-text="#{user.name}'s personality is #{Math.round(similar_celebs[0].distance * 100)}% similar to #{similar_celebs[0].user.name}'s! #CelebMatch #IBMWatson", data-hashtags="PersonalityInsights")
+			a.twitter-share-button(href='https://twitter.com/share', data-text="'#{user.name}'s personality is #{Math.round(similar_celebs[0].distance * 100)}% similar to #{similar_celebs[0].user.name}'s! #CelebMatch #IBMWatson", data-hashtags='PersonalityInsights')
 				| Tweet
-				//td(style='padding-right: 10px;')
-				//  div.fb-share-button(data-href="#", data-layout="button_count")

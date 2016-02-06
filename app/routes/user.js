@@ -212,7 +212,7 @@ router.get('/syncdb', function (req, res) {
   removeAll({}).then(function(){
     res.redirect('/');
   })
-  .fail(function (error) {
+  .catch(function (error) {
     console.log('error', error);
     res.redirect('/');
   });

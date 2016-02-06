@@ -60,7 +60,7 @@ var jsonProfiles = function(text) {
 */
 router.get('/syncdb', function (req, res) {
   console.log('update celebrity database');
-  var removeAll = Q.nfbind(Profile.remove.bind(Profile)),
+  var removeAll = Q.denodeify(Profile.remove.bind(Profile)),
     getFiles = Q.denodeify(fs.readdir),
     getUsers = Q.denodeify(req.twit.getUsers.bind(req.twit)),
     getFile = Q.denodeify(fs.readFile);
@@ -102,7 +102,7 @@ router.get('/syncdb', function (req, res) {
   .then(function(){
     res.redirect('/celebrities');
   })
-  .fail(function (error) {
+  .catch(function (error) {
     console.log('error', error);
     res.render('celebrities',{ error: error});
   });

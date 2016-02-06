@@ -4,8 +4,12 @@ block content
   include ./navbar.jade
   .row
     if profiles
-      .col-md-9.col-xs-12
+      .col-md-9.col-xs-12.col-md-push-1.col-xs-push-1.col-lg-push-1(style='margin-top:40px')
         h1 Celebrity list
+        div.alert.alert-info
+          p
+            strong #{profiles.length}
+            |  celebrities in the list
         div
           table.table.table-hover(data-height='500', data-show-columns="true", data-search='true')
             thead
@@ -13,7 +17,6 @@ block content
                 th Image
                 th name
                 th screen name
-                //th id
                 th Followers
                 th Tweets
               each c, index in profiles
@@ -24,7 +27,6 @@ block content
                   td #{c.name}
                   td
                     a(href='http://twitter.com/#{c.username}') @#{c.username}
-                  //td #{c.id}
                   td #{c.followers}
                   td #{c.tweets}
         div.alert.alert-info
@@ -36,12 +38,3 @@ block content
         div.alert.alert-danger
           h3 Error
         p #{error}
-  //-   .col-md-9
-  //-       form(method='post' action='celebrities/add')
-  //-         h3 Did we miss someone in the list?
-  //-         p.lead
-  //-           .input-group
-  //-             span.input-group-addon @
-  //-             input.form-control(type='text', value='', name='username', placeholder='Username', required)
-  //-         div.btn-group.pull-right
-  //-           button.btn.btn-default(type='submit') Add to the list!

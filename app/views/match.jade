@@ -4,18 +4,17 @@ block title
   title #{user.name}'s Celebrity Match
 
 block extra-header
-  link(rel="stylesheet", href="/css/page.css")
+  link(rel='stylesheet', href='/css/page.css')
 
 block extra-scripts
-  link(rel="stylesheet", href="/css/bootstrap-social.css")
-  script(type="text/javascript", src="/js/page.js")
+  script(type='text/javascript', src='/js/page.js')
 
 block content
-  .overlay-screen.how-it-worked(style="display: none")
+  .overlay-screen.how-it-worked(style='display: none')
     .container
       .row
         .col-md-8
-          a.button.h3.back(href="javascript:void(0)") &#8592; BACK
+          a.button.h3.back(href='javascript:void(0)') &#8592; BACK
           h3 How does this app analyze your personality?
           p Your Celebrity Match uses the 
             a(href='http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/personality-insights.html') IBM Watson Personality Insights service
@@ -85,10 +84,6 @@ block content
                         h4 #{Math.round(c.distance * 100)}%
                     img(title='Compare me to #{c.user.name}', alt='#{c.user.name} picture', src='#{c.user.image}',id='d_#{index}')
                   h5 #{c.user.name}
-    //- .row.cta
-    //-   h3.text-center
-    //-     | Not #{user.name}? 
-    //-     a(href='/') See your results!
-    script(type="text/javascript").
+    script(type='text/javascript').
       var similar_celebs =!{JSON.stringify(similar_celebs)};
       var different_celebs =!{JSON.stringify(different_celebs)};

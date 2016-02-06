@@ -17,7 +17,7 @@
 'use strict';
 
 module.exports = {
-  // Mongo database url 
+  // Mongo database url
   mongodb: process.env.MONGODB || 'mongodb://localhost/celebs',
 
   // Personality Insights credentials
@@ -29,7 +29,7 @@ module.exports = {
   },
 
   // Twitter app credentials: https://apps.twitter.com/app
-  twitter: [{
+  twitter: process.env.TWITTER ? JSON.parse(process.env.TWITTER) : [{
     consumer_key: '<consumer_key>',
     consumer_secret: '<consumer_secret>',
     access_token_key: '<access_token_key>',

@@ -2,8 +2,6 @@
 
 The application uses IBM Watson [Personality Insights][pi_docs] and Twitter to find the celebrities that are similar to your personality. Twitter is being use to get the tweets for a given handler, the text from those tweets is send to Personality Insights, who analyze the text and reply with a personality profile. That profile is compared to celebrity profiles to find the most similar.
 
-The application is running in [Bluemix][bluemix].
-
 Live demo: http://your-celebrity-match.mybluemix.net/
 
 Give it a try! Click the button below to fork into IBM DevOps Services and deploy your own copy of this application on Bluemix.  
@@ -25,7 +23,7 @@ Steps |
 
 This instructions will help you install the celebrities app in your local environment.
 
-1. Get the code by downloading this [file][code_zip] or cloning the git repository with:
+1. Clone the repository with:
 
     ```sh
     $ git clone git@github.com:watson-developer-cloud/yourcelebritymatch.git

@@ -6,10 +6,9 @@ The application is running in [Bluemix][bluemix].
 
 Live demo: http://your-celebrity-match.mybluemix.net/
 
-Give it a try! Click the button below to fork into IBM DevOps Services and deploy your own copy of this application on Bluemix.
-
-[![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/watson-developer-cloud/yourcelebritymatch)
-
+Give it a try! Click the button below to fork into IBM DevOps Services and deploy your own copy of this application on Bluemix.  
+[![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/watson-developer-cloud/yourcelebritymatch)  
+**Note**: Once you deploy the application in Bluemix you will need to do some extra steps described below to setup the database and Twitter API credentials.
 
 # How it works
 
@@ -50,8 +49,14 @@ This instructions will help you install the celebrities app in your local enviro
     ```
     (Run this in a separate terminal window)
 
-1. Update the Twitter and Personality Insights credentials in `config/config.js`
+1. You need some credentials to use Twitter API, Personality Insights and MongoDC:
+  * Get credentials to use Personality Insights, instructions [here][pi_cred].  
+  * Create a **FREE** Mongodb database using [MongoLab](https://mongolab.com).  
+  * Create a Twitter app and get the API credentials [here][twitter_app].
+1. Update the Twitter, MongoDB and Personality Insights credentials in `config/config.js`
     ```js
+    mongodb: process.env.MONGODB || 'mongodb://localhost/celebs',
+
     {
       personality_insights: {
         url:      '<url>',
@@ -67,9 +72,7 @@ This instructions will help you install the celebrities app in your local enviro
       }]
     }
     ```
-    Instructions on how to create an app and get Personality Insights credentials [here][um_cred].
 
-    Instructions on how to create an app and get Twitter credentials [here][twitter_app](you can use more than one Twitter app ;-) ).
 1. Start the app
 
     ```sh
@@ -129,10 +132,9 @@ You need to copy `username`, `password`.
   Find more open source projects on the [IBM Github Page](http://ibm.github.io/)
 
 [bluemix]: https://console.ng.bluemix.net/
-[code_zip]: https://github.rtp.raleigh.ibm.com/gattana-us/yourcelebritymatch/repository/archive.zip
 [node]: http://nodejs.org/download
 [mongodb]: http://docs.mongodb.org/manual/installation/
-[um_cred]: https://github.com/watson-developer-cloud/um-ruby/blob/master/README.md
+[pi_cred]: https://github.com/watson-developer-cloud/um-ruby/blob/master/README.md
 [twitter_app]: https://apps.twitter.com/app/new
 [german_twitter]: https://twitter.com/germanatt
 [nathan_twitter]: https://twitter.com/nfriedly

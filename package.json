@@ -9,7 +9,10 @@
   "dependencies": {
     "body-parser": "^1.14.2",
     "express": "^4.13.4",
+    "express-rate-limit": "^2.1.0",
+    "express-secure-only": "^0.2.1",
     "extend": "^3.0.0",
+    "helmet": "^1.1.0",
     "jade": "^1.11.0",
     "mongoose": "^4.4.2",
     "q": "^2.0.3",

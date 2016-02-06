@@ -75,11 +75,11 @@ block content
       .centered-container
         each style, index in styles
           .celeb-img.shrinked.img-container(style=style)
-            img(src=pics[index].image.replace("_normal","_400x400"), title=pics[index].username)
+            img(src=(pics[index] || {image:''}).image.replace('_normal','_400x400'), title=(pics[index] || {}).username)
 
 // No footer on this page
 block footer
 
 block extra-scripts
-  script(type="text/javascript", src="/js/index-page.js")
+  script(type='text/javascript', src='/js/index-page.js')
 

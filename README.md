@@ -6,6 +6,11 @@ The application is running in [Bluemix][bluemix].
 
 Live demo: http://your-celebrity-match.mybluemix.net/
 
+Give it a try! Click the button below to fork into IBM DevOps Services and deploy your own copy of this application on Bluemix.
+
+[![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/watson-developer-cloud/yourcelebritymatch)
+
+
 # How it works
 
 Steps | 

@@ -16,24 +16,30 @@
 
 'use strict';
 
-// Module dependencies
-var express    = require('express'),
-  bodyParser   = require('body-parser');
+// security.js
+var secure     = require('express-secure-only'),
+  rateLimit    = require('express-rate-limit'),
+  helmet       = require('helmet');
 
 module.exports = function (app) {
-  // Only loaded when SECURE_EXPRESS is `true`
-  if (process.env.SECURE_EXPRESS)
-    require('./security')(app);
+  app.enable('trust proxy');
 
-  // Setup static public directory
-  app.use(express.static(__dirname + '/../app/public'));
-  app.set('view engine', 'jade');
-  app.set('views', __dirname + '/../app/views');
+  // 1. redirects http to https
+  app.use(secure());
 
-  app.use(bodyParser.urlencoded({ extended: true, limit: '1mb' }));
-  app.use(bodyParser.json({ limit: '1mb' }));
+  // 2. helmet with defaults
+  app.use(helmet());
 
-  // Setup static public directory
-  app.use(express.static(__dirname + '/../public'));
+  // 3. rate limiting
+  var limiter = rateLimit({
+    windowMs: 30 * 1000, // seconds
+    delayMs: 0,
+    max: 3,
+    message: JSON.stringify({
+      error:'Too many requests, please try again in 30 seconds.',
+      code: 429
+    }),
+  });
 
+  app.use('/api/', limiter);
 };

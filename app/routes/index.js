@@ -1,4 +1,4 @@
-/* Copyright IBM Corp. 2014
+/* Copyright IBM Corp. 2015
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,25 +21,6 @@ module.exports = function (app) {
 
   app.use('/tos', function(req, res) {
     res.render('tos');
-  });
-    // HTTP 500
-  app.use(function(err, req, res, next){
-    res.status(err.status || 500);
-    res.render('500', { error: err });
-  });
-
-  // HTTP 404
-  app.use(function(req, res){
-    res.status(404);
-    if (req.accepts('html')) {
-      res.render('404', { url: req.url });
-      return;
-    }
-    if (req.accepts('json')) {
-      res.send({ error: 'Not found' });
-      return;
-    }
-    res.type('txt').send('Not found');
   });
 
 };

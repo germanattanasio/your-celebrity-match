@@ -1,8 +1,13 @@
+---
+declared-services:
+  personality-insights-service-standard:
+    label: personality_insights
+    plan: tiered
+
 applications:
 - services:
   - personality-insights-service
-  - mongodb
   name: your-celebrity-match
-  command: node app.js
+  command: npm start
   path: .
   memory: 512M

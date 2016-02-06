@@ -1,4 +1,4 @@
-/* Copyright IBM Corp. 2014
+/* Copyright IBM Corp. 2015
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,9 +20,7 @@ var router = require('express').Router(),
   fs       = require('fs'),
   Q        = require('q'),
   Profile  = mongoose.model('Profile'),
-  User     = mongoose.model('User'),
-  logger   = require('../../config/logger');
-
+  User     = mongoose.model('User');
 
 /**
  * Render the celebrity list
@@ -61,7 +59,7 @@ var jsonProfiles = function(text) {
  * Validate twitter usernames
 */
 router.get('/syncdb', function (req, res) {
-  logger.info('update celebrity database');
+  console.log('update celebrity database');
   var removeAll = Q.nfbind(Profile.remove.bind(Profile)),
     getFiles = Q.denodeify(fs.readdir),
     getUsers = Q.denodeify(req.twit.getUsers.bind(req.twit)),
@@ -92,7 +90,7 @@ router.get('/syncdb', function (req, res) {
       users = users.concat(_users);
     });
 
-    logger.info(users.length);
+    console.log(users.length);
       return Q.all(users.map(function(u){
         getFile('./profiles/'+u.id+'.json')
         .then(function(profileJson) {
@@ -105,8 +103,8 @@ router.get('/syncdb', function (req, res) {
     res.redirect('/celebrities');
   })
   .fail(function (error) {
-    logger.error(error);
-    res.render('celebrities',{error:error});
+    console.log('error', error);
+    res.render('celebrities',{ error: error});
   });
 });
 

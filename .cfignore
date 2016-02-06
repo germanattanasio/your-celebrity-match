@@ -1,6 +1,3 @@
 node_modules
-logs/app.log
-.idea/
-logs/
 .DS_Store
-.DS_Store?
+.env

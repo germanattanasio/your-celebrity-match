@@ -1,4 +1,4 @@
-/* Copyright IBM Corp. 2014
+/* Copyright IBM Corp. 2015
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,8 +17,7 @@
 
 var util  = require('util'),
   twitter = require('twitter'),
-  pi_util = require('../util/util'),
-  logger  = require('../../config/logger');
+  pi_util = require('../util/util');
 
 var MAX_COUNT = 200;
 
@@ -41,7 +40,7 @@ TwitterHelper.prototype.getInstance = function() {
   var instance = this.count % this.twit.length;
   this.count ++;
 
-  logger.info('instance',instance);
+  console.log('instance', instance);
   return this.twit[instance];
 };
 
@@ -58,7 +57,7 @@ var englishAndNoRetweet = function(tweet) {
  * Only returns english and original tweets (no retweets)
  */
 TwitterHelper.prototype.getTweets = function(screen_name, callback) {
-  logger.info('getTweets for:', screen_name);
+  console.log('getTweets for:', screen_name);
 
   var self = this,
     tweets = [],
@@ -78,7 +77,7 @@ TwitterHelper.prototype.getTweets = function(screen_name, callback) {
     .map(pi_util.toContentItem);
 
     tweets = tweets.concat(items);
-    logger.info(screen_name,'_tweets.count:',tweets.length);
+    console.log(screen_name,'_tweets.count:',tweets.length);
     if (_tweets.length > 1) {
       params.max_id = _tweets[_tweets.length-1].id - 1;
       self.getInstance().getUserTimeline(params, processTweets);
@@ -94,11 +93,11 @@ TwitterHelper.prototype.getTweets = function(screen_name, callback) {
  * It looks at params to determinate what to use
  */
 TwitterHelper.prototype.getUsers = function(params, callback) {
-  logger.info('getUsers:', params);
+  console.log('getUsers:', params);
 
   this.getInstance().post('/users/lookup.json',params,function(tw_users) {
     if (tw_users.statusCode){
-      logger.info('error getting the twitter users');
+      console.log('error getting the twitter users');
       callback(tw_users);
     } else
       callback(null, tw_users.map(pi_util.toAppUser.bind(pi_util)));
@@ -111,7 +110,7 @@ TwitterHelper.prototype.getUsers = function(params, callback) {
 TwitterHelper.prototype.showUser = function(screen_name, callback) {
   this.getInstance().showUser(screen_name, function(user){
     if (user.statusCode){
-      logger.info(screen_name, 'is not a valid twitter');
+      console.log(screen_name, 'is not a valid twitter');
       callback(user);
     } else
       callback(null, pi_util.toAppUser(user));

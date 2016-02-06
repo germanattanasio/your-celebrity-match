@@ -1,4 +1,4 @@
-/* Copyright IBM Corp. 2014
+/* Copyright IBM Corp. 2015
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +21,6 @@ var router   = require('express').Router(),
   Q          = require('q'),
   Profile    = mongoose.model('Profile'),
   User       = mongoose.model('User'),
-  logger     = require('../../config/logger'),
   extend     = require('extend'),
   util       = require('../util/util');
 
@@ -105,38 +104,38 @@ router.get('/like/@:username', function (req, res) {
 
   showUser(username)
   .then(function(user) {
-    logger.info('username:', username);
+    console.log('username:', username);
 
     if (!user)
       return;
     else if (user.protected)
       return res.render('index',
-        {info: '@'+username+' is protected, try another one.',pics:pics});
+        { info: '@'+username+' is protected, try another one.', pics: pics});
 
     return getCelebrityFromDB({id:user.id})
     .then(function(celebrity){
       if (celebrity && celebrity.length === 0) {
-        logger.info(user.username,'is not a celebrity, lets see if is in the DB');
+        console.log(user.username,'is not a celebrity, lets see if is in the DB');
         return getUserFromDB({id:user.id})
         .then(function(dbUser) {
           if (dbUser) {
-            logger.info(username, 'found in the database');
+            console.log(username, 'found in the database');
             return extend(dbUser,user);
           }
           else {
-            logger.info(username, 'is a new user, lets get his tweets');
+            console.log(username, 'is a new user, lets get his tweets');
 
             // Get the tweets, profile and add him to the database
             return getTweets(username)
               .then(function(tweets) {
-                logger.info(username, 'has', tweets.length, 'tweets');
+                console.log(username, 'has', tweets.length, 'tweets');
                 return getProfile({contentItems:tweets})
                 .then(function(profile) {
                   if (!profile)
                     return;
-                  logger.info(username, 'analyze with personality insights');
+                  console.log(username, 'analyze with personality insights');
 
-                  logger.info(username, 'added to the database');
+                  console.log(username, 'added to the database');
                   user.profile = JSON.stringify(profile);
                   return saveUserInDB(user);
                 });
@@ -144,13 +143,13 @@ router.get('/like/@:username', function (req, res) {
           }
         });
       } else {
-        logger.info(user.username,'is a celebrity, we return the profile from the DB');
-        return extend(celebrity[0],user);
+        console.log(user.username,'is a celebrity, we return the profile from the DB');
+        return extend(celebrity[0], user);
       }
     })
     .then(function(dbUser) {
       if (!dbUser) return;
-      logger.info(dbUser.username,'to be comparted to:',celebs.length,'celebrities');
+      console.log(dbUser.username,'to be comparted to:',celebs.length,'celebrities');
       var distances = util.calculateDistances(dbUser, celebs);
       // Remove celebrities to match to themselves
       if (distances[0].distance === 1.00)
@@ -172,8 +171,8 @@ router.get('/like/@:username', function (req, res) {
     });
   })
   .catch(function (error) {
-    logger.error('catch():',error);
-    var ret = {pics:pics, user: {screen_name:username}};
+    console.log('catch():', error);
+    var ret = { pics:pics, user: { screen_name: username}};
     var status = 500;
     if (error.statusCode === 429)
       ret.info = 'Twitter rate limit exceeded, come back in 15 minutes.';
@@ -189,15 +188,15 @@ router.get('/like/@:username', function (req, res) {
     }
 
     res.status(status);
-    res.render('index',ret);
+    res.render('index', ret);
 
     // return null because we already fulfill the response
     return null;
 
   }).done(function(result){
-    logger.info('done()');
+    console.log('done()');
     if (result)
-      res.render('match',result);
+      res.render('match', result);
   });
 });
 
@@ -207,14 +206,14 @@ router.get('/like/:username', function(req, res) {
 
 
 router.get('/syncdb', function (req, res) {
-  logger.info('remove users from database');
+  console.log('remove users from database');
   var removeAll = Q.nfbind(User.remove.bind(User));
 
   removeAll({}).then(function(){
     res.redirect('/');
   })
   .fail(function (error) {
-    logger.error(error);
+    console.log('error', error);
     res.redirect('/');
   });
 });

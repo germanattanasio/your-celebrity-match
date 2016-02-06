@@ -15,25 +15,36 @@
  */
 
 'use strict';
-
-// Module dependencies
-var express    = require('express'),
-  bodyParser   = require('body-parser');
-
 module.exports = function (app) {
-  // Only loaded when SECURE_EXPRESS is `true`
-  if (process.env.SECURE_EXPRESS)
-    require('./security')(app);
 
-  // Setup static public directory
-  app.use(express.static(__dirname + '/../app/public'));
-  app.set('view engine', 'jade');
-  app.set('views', __dirname + '/../app/views');
+  // catch 404 and forward to error handler
+  app.use(function(req, res, next) {
+    var err = new Error('Not Found');
+    err.code = 404;
+    err.message = 'Not Found';
+    next(err);
+  });
 
-  app.use(bodyParser.urlencoded({ extended: true, limit: '1mb' }));
-  app.use(bodyParser.json({ limit: '1mb' }));
+  // error handler
+  app.use(function(err, req, res, next) {
+    var error = {
+      code: err.code || 500,
+      error: err.error || err.message,
+      url: req.url
+    };
 
-  // Setup static public directory
-  app.use(express.static(__dirname + '/../public'));
+    console.log('error:', error);
 
+    res.status(error.code);
+
+    if (req.accepts('html')) {
+      res.render('404', error);
+      return;
+    } else if (req.accepts('json')) {
+      res.json(error);
+      return;
+    } else {
+      res.type('txt').send(error.error);
+    }
+  });
 };

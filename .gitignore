@@ -2,3 +2,6 @@ node_modules
 .idea/
 .DS_Store
 profiles/*.json
+TWITTER.json
+VCAP_SERVICES.json
+run.sh

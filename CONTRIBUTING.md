@@ -1,6 +1,6 @@
 # Questions
 
-If you are having difficulties running the app or have a question about the service, please ask a question on [dW Answers](https://developer.ibm.com/answers/questions/ask/?topics=watson) or [Stack Overflow](http://stackoverflow.com/questions/ask?tags=ibm-watson).
+If you are having difficulties running the app or have a question about the service, please ask a question on [dW Answers](https://developer.ibm.com/answers/questions/ask/?topics=watson) or [Stack Overflow](https://stackoverflow.com/questions/ask?tags=ibm-watson).
 
 # Issues
 

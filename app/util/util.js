@@ -55,7 +55,7 @@ module.exports = {
       tweets: user.statuses_count,
       verified: user.verified,
       protected: user.protected,
-      image: user.profile_image_url
+      image: user.profile_image_url_https
     };
   },
 

@@ -17,7 +17,7 @@
     "mongoose": "^4.4.2",
     "q": "^2.0.3",
     "twitter": "^0.2.13",
-    "watson-developer-cloud": "^1.2.0"
+    "watson-developer-cloud": "^1.2.2"
   },
   "author": "IBM Corp.",
   "contributors": [

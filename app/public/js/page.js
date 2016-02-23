@@ -47,7 +47,7 @@ function displayCelebrity(celebrity) {
 /**
  * Makes updates for a profile type switch
  */
-function switchTypeUpdates(type, newCeleb, showClass, hideClass1, hideClass2, showSwitch, hideSwitch1, hideSwitch2) {
+function switchTypeUpdates(type, newCeleb, showClass, hideClass1, hideClass2, showSwitch, hideSwitch1, hideSwitch2, typeDesc) {
   if (currentType === type)
     return;
   currentType = type;
@@ -63,6 +63,7 @@ function switchTypeUpdates(type, newCeleb, showClass, hideClass1, hideClass2, sh
   $(hideSwitch1).removeClass('switch-button-active');
   $(hideSwitch2).addClass('switch-button-disabled');
   $(hideSwitch2).removeClass('switch-button-active');
+  $('.type-desc').text(', your ' + typeDesc + '...');
 }
 
 /**
@@ -71,13 +72,13 @@ function switchTypeUpdates(type, newCeleb, showClass, hideClass1, hideClass2, sh
  * @param  {Object} e event
  */
 $(document).on('click', '.personality-switch', function() {
-  switchTypeUpdates(PERSONALITY, similar_personalities[0], '.personality', '.needs', '.values', '.personality-switch', '.needs-switch', '.values-switch');
+  switchTypeUpdates(PERSONALITY, similar_personalities[0], '.personality', '.needs', '.values', '.personality-switch', '.needs-switch', '.values-switch', 'personality is');
 });
 $(document).on('click', '.needs-switch', function() {
-  switchTypeUpdates(NEEDS, similar_needs[0], '.needs', '.personality', '.values', '.needs-switch', '.personality-switch', '.values-switch');
+  switchTypeUpdates(NEEDS, similar_needs[0], '.needs', '.personality', '.values', '.needs-switch', '.personality-switch', '.values-switch', 'needs are');
 });
 $(document).on('click', '.values-switch', function() {
-  switchTypeUpdates(VALUES, similar_values[0], '.values', '.needs', '.personality', '.values-switch', '.needs-switch', '.personality-switch');
+  switchTypeUpdates(VALUES, similar_values[0], '.values', '.needs', '.personality', '.values-switch', '.needs-switch', '.personality-switch', 'values are');
 });
 
 /**

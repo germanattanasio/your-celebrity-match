@@ -413,6 +413,10 @@
   padding-right: .625rem;
 }
 
+.your-personality .description p {
+  display: inline-block;
+}
+
 a.tlink {
   text-decoration: none;
   color: black;

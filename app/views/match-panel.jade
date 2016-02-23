@@ -4,15 +4,9 @@
 - var valuesTraits = [['Modernity','Tradition'],['Constancy','Stimulation'],['Stoicism','Hedonism'],['Non-conformity','Conventionality'],['Egoism','Selflessness']]
 	div.your-personality
 		div.description
-			p.personality
+			p
 				span.me #{user.name}
-				| , your Twitter personality is...
-			p.needs.hide-traits
-				span.me #{user.name}
-				| , your Twitter needs are...
-			p.values.hide-traits
-				span.me #{user.name}
-				| , your Twitter values are...
+				p.type-desc , your Twitter personality is...
 	.row.avatars-row
 		.col-sm-4.col-xs-12.me
 			div.avatar.text-right.img-circle

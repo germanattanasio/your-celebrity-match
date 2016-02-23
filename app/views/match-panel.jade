@@ -1,10 +1,18 @@
 
-- var traits = [['Cautious','Curious'],['Easy Going','Organized'],['Reserved', 'Outgoing'],['Analytical', 'Compassionate'],['Confident', 'Sensitive']]
+- var personalityTraits = [['Cautious','Curious'],['Easy Going','Organized'],['Reserved', 'Outgoing'],['Analytical', 'Compassionate'],['Confident', 'Sensitive']]
+- var needsTraits = [['Ease','Challenge'],['Independence','Belonging'],['Fulfillment','Exploration'],['Calm','Excitement'],['Contentedness','Acceptance'],['Imperfection','Perfection'],['Restraint','Freedom'],['Introversion','Extroversion'],['Complacency','Eagerness'],['Obliviousness','Identification'],['Risk','Stability'],['Flexibility','Structure']]
+- var valuesTraits = [['Modernity','Tradition'],['Constancy','Stimulation'],['Stoicism','Hedonism'],['Non-conformity','Conventionality'],['Egoism','Selflessness']]
 	div.your-personality
 		div.description
-			p
+			p.personality
 				span.me #{user.name}
 				| , your Twitter personality is...
+			p.needs.hide-traits
+				span.me #{user.name}
+				| , your Twitter needs are...
+			p.values.hide-traits
+				span.me #{user.name}
+				| , your Twitter values are...
 	.row.avatars-row
 		.col-sm-4.col-xs-12.me
 			div.avatar.text-right.img-circle
@@ -34,21 +42,53 @@
 			div.text-center
 				p.avatar-name
 					a.cel_username
-each trait, i in traits
-	.row.trait-row
+	.row.type-row
+		.col-sm-offset-3.col-xs-offset-1.col-sm-6.col-xs-10
+			div.type-buttons
+				a.type-btn.switch-button-active.personality-switch(id='pswitch' href='javascript:void(0);') Personality
+				a.type-btn.switch-button-disabled.needs-switch(id='nswitch' href='javascript:void(0);') Needs
+				a.type-btn.switch-button-disabled.values-switch(id='vswitch' href='javascript:void(0);') Values
+each trait, i in personalityTraits
+	.row.trait-row.personality
 		.col-md-3
 			p.text-right #{trait[0]}
 		.col-md-3.col-md-push-6
 			p.text-left #{trait[1]}
 		.col-md-6.col-md-pull-3
 			div.measuring-bar
-				div.point.mep(style='left:calc(#{user_profile[i].value * 100 }%)')
-				div.point.celebrityp(id='trait_#{i}')
+				div.point.mep(style='left:calc(#{user_profile.personality[i].value * 100 }%)')
+				div.point.celebrityp(id='personality_trait_#{i}')
+each trait, i in needsTraits
+	.row.trait-row.needs.hide-traits
+		.col-md-3
+			p.text-right #{trait[0]}
+		.col-md-3.col-md-push-6
+			p.text-left #{trait[1]}
+		.col-md-6.col-md-pull-3
+			div.measuring-bar
+				div.point.mep(style='left:calc(#{user_profile.needs[i].value * 100 }%)')
+				div.point.celebrityp(id='needs_trait_#{i}')
+each trait, i in valuesTraits
+	.row.trait-row.values.hide-traits
+		.col-md-3
+			p.text-right #{trait[0]}
+		.col-md-3.col-md-push-6
+			p.text-left #{trait[1]}
+		.col-md-6.col-md-pull-3
+			div.measuring-bar
+				div.point.mep(style='left:calc(#{user_profile.values[i].value * 100 }%)')
+				div.point.celebrityp(id='values_trait_#{i}')
 div.more-info
 	a.how-it-works-link(href='javascript:void(0);') How'd we get this?
 div.social-media
 	div.social-media-buttons
 		h6 Share this result:
-		div.twitter
-			a.twitter-share-button(href='https://twitter.com/share', data-text="'#{user.name}'s personality is #{Math.round(similar_celebs[0].distance * 100)}% similar to #{similar_celebs[0].user.name}'s! #CelebMatch #IBMWatson", data-hashtags='PersonalityInsights')
+		div.twitter.personality
+			a.twitter-share-button(href='https://twitter.com/share', data-text="'#{user.name}'s personality is #{Math.round(similar_personalities[0].distance * 100)}% similar to #{similar_personalities[0].user.name}'s! #CelebMatch #IBMWatson", data-hashtags='PersonalityInsights')
+				| Tweet
+		div.twitter.needs.hide-traits
+			a.twitter-share-button(href='https://twitter.com/share', data-text="'#{user.name}'s needs are #{Math.round(similar_needs[0].distance * 100)}% similar to #{similar_needs[0].user.name}'s! #CelebMatch #IBMWatson", data-hashtags='PersonalityInsights')
+				| Tweet
+		div.twitter.values.hide-traits
+			a.twitter-share-button(href='https://twitter.com/share', data-text="'#{user.name}'s values are #{Math.round(similar_values[0].distance * 100)}% similar to #{similar_values[0].user.name}'s! #CelebMatch #IBMWatson", data-hashtags='PersonalityInsights')
 				| Tweet

@@ -15,6 +15,12 @@
 /*global $:false */
 
 'use strict';
+var currentType;
+
+// Constants for types of profiles
+var PERSONALITY = 0,
+    NEEDS = 1,
+    VALUES = 2;
 
 /**
  * Display a celebrity and its traits
@@ -28,11 +34,51 @@ function displayCelebrity(celebrity) {
   $('.cel_distance').text(Math.round(celebrity.distance * 100) + '%');
   $('.cel_image').attr('src', celebrity.user.image.replace('_normal', '_400x400'));
 
-  // Big 5
+  // Update traits
+  var idType;
+  if (currentType === PERSONALITY) idType = '#personality_trait_';
+  else if (currentType === NEEDS) idType = '#needs_trait_';
+  else if (currentType === VALUES) idType = '#values_trait_';
   celebrity.profile.forEach(function(trait, i) {
-    $('#trait_' + i).css('left', 'calc(' + (trait.value * 100) + '%)');
+    $(idType + i).css('left', 'calc(' + (trait.value * 100) + '%)');
   });
 }
+
+/**
+ * Makes updates for a profile type switch
+ */
+function switchTypeUpdates(type, newCeleb, showClass, hideClass1, hideClass2, showSwitch, hideSwitch1, hideSwitch2) {
+  if (currentType === type)
+    return;
+  currentType = type;
+  displayCelebrity(newCeleb);
+
+  // Make DOM class updates
+  $(showClass).removeClass('hide-traits');
+  $(hideClass1).addClass('hide-traits');
+  $(hideClass2).addClass('hide-traits');
+  $(showSwitch).addClass('switch-button-active');
+  $(showSwitch).removeClass('switch-button-disabled');
+  $(hideSwitch1).addClass('switch-button-disabled');
+  $(hideSwitch1).removeClass('switch-button-active');
+  $(hideSwitch2).addClass('switch-button-disabled');
+  $(hideSwitch2).removeClass('switch-button-active');
+}
+
+/**
+ * On click handlers for changing comparison views
+ * Get the celeb id and call displayCelebrity if it exists
+ * @param  {Object} e event
+ */
+$(document).on('click', '.personality-switch', function() {
+  switchTypeUpdates(PERSONALITY, similar_personalities[0], '.personality', '.needs', '.values', '.personality-switch', '.needs-switch', '.values-switch');
+});
+$(document).on('click', '.needs-switch', function() {
+  switchTypeUpdates(NEEDS, similar_needs[0], '.needs', '.personality', '.values', '.needs-switch', '.personality-switch', '.values-switch');
+});
+$(document).on('click', '.values-switch', function() {
+  switchTypeUpdates(VALUES, similar_values[0], '.values', '.needs', '.personality', '.values-switch', '.needs-switch', '.personality-switch');
+});
 
 /**
  * On click handler for celebrity images.
@@ -42,10 +88,16 @@ function displayCelebrity(celebrity) {
 $('.avatar-small').click(function(e) {
   var celebrity;
   var id = $(this).find('img').prop('id');
-  if (id.match('^s_'))
-    celebrity = similar_celebs[id.slice(2)];
-  else
-    celebrity = different_celebs[id.slice(2)];
+  if (id.match('^s_')) {
+    if (currentType === PERSONALITY) celebrity = similar_personalities[id.slice(2)];
+    else if (currentType === NEEDS) celebrity = similar_needs[id.slice(2)];
+    else if (currentType === VALUES) celebrity = similar_values[id.slice(2)];
+  }
+  else {
+    if (currentType === PERSONALITY) celebrity = different_personalities[id.slice(2)];
+    else if (currentType === NEEDS) celebrity = different_needs[id.slice(2)];
+    else if (currentType === VALUES) celebrity = different_values[id.slice(2)];
+  }
 
   if (celebrity)
     displayCelebrity(celebrity);
@@ -113,5 +165,6 @@ $('.page-content img').on('load', function() {
 });
 
 $(document).ready(function() {
-  displayCelebrity(similar_celebs[0]);
+  currentType = PERSONALITY;
+  displayCelebrity(similar_personalities[0]);
 });

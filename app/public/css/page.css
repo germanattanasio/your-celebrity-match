@@ -71,7 +71,7 @@
 
 .avatars-row {
   margin-top: -37px;
-  margin-bottom: 1.875rem;
+  margin-bottom: .8rem;
 }
 
 .avatar,
@@ -143,14 +143,49 @@
   width: 100%;
   border-bottom: 1px solid white;
 }
-
 .similar-to {
   margin-top: 3px;
 }
 .similar-to span {
   color: #0098ff;
 }
-
+.hide-traits {
+  display: none;
+}
+.type-buttons {
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+.type-btn {
+  display: inline-block;
+  font-size: 1rem;
+  width: 5.5rem;
+  padding: 2px;
+}
+.switch-button-active {
+  background-color: #eabf0a;
+}
+.switch-button-disabled {
+  background-color: #404041;
+}
+#pswitch {
+  text-decoration: none;
+  color: white;
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+}
+#nswitch {
+  text-decoration: none;
+  color: white;
+  border: 1px solid white;
+}
+#vswitch {
+  text-decoration: none;
+  color: white;
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
 .me,
 .me .avatar,
 .me .third-border,
@@ -361,7 +396,6 @@
   line-height: 20px;
 }
 .social-media .twitter {
-  display: inline-block;
   width: 76px;
   position: relative;
   margin-left: .5rem;

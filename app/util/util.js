@@ -63,14 +63,15 @@ module.exports = {
    * Calculate the euclidean distance between user and celebs
    * @param  {Object} user   the user object
    * @param  {Array} celebs the celebs
+   * @param  {Int} type the type of profile distances being calculated
    * @return {Array} celebs and distances
    */
-  calculateDistances: function(user, celebs) {
+  calculateDistances: function(user, celebs, type) {
     return celebs.map(function(celebrity) {
       var ret = {
         user: celebrity,
-        distance: similarity(user.profile, celebrity.profile),
-        profile: flatten.big5(celebrity.profile)
+        distance: similarity(user.profile, celebrity.profile, type),
+        profile: flatten.traits(celebrity.profile, type)
       };
       return ret;
     }).sort(profileSort);

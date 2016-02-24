@@ -16,13 +16,15 @@
 'use strict';
 
 /**
- * Return the Big 5 Traits normalized
- * @return Array      The 5 main traits
+ * Return the desired Traits normalized
+ * @param  {tree}     JSON personality results object
+ * @param  int type   type of personality results being normalized
+ * @return Array      The normalized traits
  */
-var big5 = function(tree) {
+var traits = function(tree, type) {
   var profile = typeof(tree) === 'string' ? JSON.parse(tree) : tree;
-  var _big5 = profile.tree.children[0].children[0].children;
-  return _big5.map(function(trait) {
+  var _traits = profile.tree.children[type].children[0].children;
+  return _traits.map(function(trait) {
     return {
       name: trait.name,
       value: trait.percentage
@@ -30,4 +32,4 @@ var big5 = function(tree) {
   });
 };
 
-module.exports.big5 = big5;
+module.exports.traits = traits;

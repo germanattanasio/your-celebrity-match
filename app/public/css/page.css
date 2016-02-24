@@ -161,28 +161,32 @@
   display: inline-block;
   font-size: 1rem;
   width: 5.5rem;
-  padding: 2px;
+  padding: 3px;
+}
+a.type-btn {
+  color: white;
+  text-decoration: none;
 }
 .switch-button-active {
   background-color: #eabf0a;
 }
+a.switch-button-active {
+  color: #333;
+}
 .switch-button-disabled {
   background-color: #404041;
 }
-#pswitch {
+.pswitch {
   text-decoration: none;
-  color: white;
   border-top-left-radius: 6px;
   border-bottom-left-radius: 6px;
 }
-#nswitch {
+.nswitch {
   text-decoration: none;
-  color: white;
   border: 1px solid white;
 }
-#vswitch {
+.vswitch {
   text-decoration: none;
-  color: white;
   border-top-right-radius: 6px;
   border-bottom-right-radius: 6px;
 }

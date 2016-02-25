@@ -52,6 +52,7 @@ This instructions will help you install the celebrities app in your local enviro
   * Create a **FREE** Mongodb database using [MongoLab](https://mongolab.com).  
   * Create a Twitter app and get the API credentials [here][twitter_app].
 1. Update the Twitter, MongoDB and Personality Insights credentials in `config/config.js`
+
     ```js
     mongodb: process.env.MONGODB || 'mongodb://localhost/celebs',
 
@@ -80,6 +81,13 @@ This instructions will help you install the celebrities app in your local enviro
 1. Update the database with the celebrities by going to:
 
     `http://localhost:3000/celebrities/syncdb`
+    
+1. You can add additional celebrities to the database as long as they are verified, have at least 10,000 followers, and have over 1,000 tweets. To add another celebrity, call:
+
+	```
+	http://localhost:3000/celebrities/add/@username
+	```
+	where `username` is the Twitter handle of the celebrity you would like to add.
 
 
 ## Personality Insights Credentials
@@ -92,7 +100,8 @@ $ cf env <application-name>
 ```
 
 Example output:
-```sh
+
+```
   System-Provided:
   {
   "VCAP_SERVICES": {
@@ -113,10 +122,21 @@ Example output:
 You need to copy `username`, `password`.
 
 ## Celebrities
-  The application comes with two profiles: [@germanatt][german_twitter] and [@nfriedly][nathan_twitter]. If you want to add more profiles you will have to:
-  1. Choose a person to include as 'celebrity'. You need at least 100 different words writted by that person, blog posts, tweets, text messages, emails will work.
+  The application comes with two 'celebrity' profiles: [@germanatt][german_twitter] and [@nfriedly][nathan_twitter]. If you want to add more profiles, you have two options:
+
+### Auto-Lookup
+1. 	Choose a person on Twitter to include as a 'celebrity'. Ensure this person is verified, has at least 10,000 followers, and has over 1,000 tweets.
+2. Make a call to:
+
+	```
+	http://localhost:3000/celebrities/add/@username
+	```
+	where `username` is the Twitter handle of the celebrity you would like to add.
+
+### SyncDB
+  1. Choose a person to include as a 'celebrity'. You need at least 100 different words written by that person. Blog posts, tweets, text messages, emails will work.
   1. Get the profile by using the [Personality Insights][pi_docs] service with the text you have and save the json profile in the `profiles` folder. Make sure the file has the `.json` extension as in the examples provided.
-  1. Start the app and go to: `http://localhost:3000/celebrities/syncdb`. It will repopulate the application database and add the new profile.
+  1. Start the app and go to: `http://localhost:3000/celebrities/syncdb`. It will repopulate the application database and add the new profile. Be aware that this command will erase all celebrities previously added to the database.
 
 ## License
 

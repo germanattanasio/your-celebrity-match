@@ -104,8 +104,127 @@ router.get('/syncdb', function (req, res) {
   })
   .catch(function (error) {
     console.log('error', error);
-    res.render('celebrities',{ error: error});
+    res.render('celebrities',{error: error});
   });
+});
+
+/**
+ * Helper routers for adding/removing celebrities
+*/
+router.post('/add/', function(req, res) {
+  var username = req.body.username;
+  if (username && username.substr(0,1) !== '@') {
+    username = '@' + username;
+  }
+  res.redirect(username ? '/add/' + username : '/');
+});
+
+router.post('/remove/', function(req, res) {
+  var username = req.body.username;
+  if (username && username.substr(0,1) !== '@') {
+    username = '@' + username;
+  }
+  res.redirect(username ? '/remove/' + username : '/');
+});
+
+/**
+ * Add a celebrity to the list
+*/
+router.get('/add/@:username', function(req,res) {
+  var username = req.params.username;
+  // Check if the user exists
+  Profile.findOne({username:username}, function(err,profile) {
+    if (err)
+      res.render('celebrities',{error: err});
+    else if (profile) {
+      console.log('User is already in the database');
+      res.redirect('../');
+    }
+    else {
+      // Check if the user is verified, >10k followers, and >1k tweets
+      var showUser = Q.denodeify(req.twit.showUser.bind(req.twit));
+      showUser(username)
+      .then(function(user) {
+        if (!user.verified || user.tweets < 1000 || user.followers < 10000)
+          res.render('celebrities',{error: 'User does not qualify as a celebrity'});
+        else if (user.protected)
+          res.render('celebrities',{error: 'User is protected and cannot be added'});
+        else {
+          // Get the tweets, profile and add him to the database
+          var getTweets = Q.denodeify(req.twit.getTweets.bind(req.twit));
+          return getTweets(username)
+          .then(function(tweets) {
+            console.log(username, 'has', tweets.length, 'tweets');
+            var getProfile = Q.denodeify(req.personality_insights.profile.bind(req.personality_insights));
+            return getProfile({contentItems:tweets})
+            .then(function(profile) {
+              if (!profile)
+                return;
+              console.log(username, 'analyze with personality insights');
+
+              console.log(username, 'added to the database');
+              user.profile = JSON.stringify(profile);
+              var saveProfileInDB = Q.denodeify(Profile.createOrUpdate.bind(Profile));
+              return saveProfileInDB(user);
+            });
+          })
+          .then(function(dbUser) {
+            if (!dbUser) return;
+            res.redirect('../');
+
+            // return null because we already fulfill the response
+            return null;
+          });
+        }
+      })
+      .catch(function (error) {
+        console.log('catch():', error);
+        var err,
+          status = 500;
+        if (error.statusCode === 429)
+          err = 'Twitter rate limit exceeded, come back in 15 minutes.';
+        else if (error.statusCode === 503)
+          err = 'The Twitter servers are overloaded with requests. Try again later.';
+        else if (error.statusCode === 404) {
+          err = 'Sorry, @' + username + ' does not exist.';
+          status = 404;
+        } else {
+          err = 'Sorry, there was an error. Please try again later.';
+        }
+
+      res.status(status);
+      res.render('celebrities',{error: err});
+
+      // return null because we already fulfill the response
+      return null;
+      });
+    }
+  });
+});
+
+/**
+ * Render the celebrity list
+*/
+router.get('/remove/@:username', function(req,res) {
+  var username = req.params.username;
+  Profile.remove({username:username},function(err, result){
+    if (err)
+      res.render('celebrities',{error: err});
+    else {
+      res.redirect('../');
+    }
+  });
+});
+
+/**
+ * Helper routers for adding/removing celebrities
+*/
+router.get('/add/:username', function(req, res) {
+  res.redirect('/celebrities/add/@' + req.params.username);
+});
+
+router.get('/remove/:username', function(req, res) {
+  res.redirect('/celebrities/remove/@' + req.params.username);
 });
 
 module.exports = router;

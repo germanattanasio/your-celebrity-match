@@ -15,7 +15,9 @@
 
 'use strict';
 
-var mongoose = require('mongoose');
+var mongoose = require('mongoose'),
+  extend = require('extend');
+
 var ProfileSchema = mongoose.Schema({
   name:      String,
   username:  String,
@@ -25,5 +27,33 @@ var ProfileSchema = mongoose.Schema({
   id:        String,
   image:     String
 });
+
+// Create a new user or update the existing one
+ProfileSchema.statics.createOrUpdate = function(profile, done){
+  var Profile = this;
+  // Build dynamic key query
+  var query = { username: profile.username };
+
+  // Search for a profile from the given auth origin
+  Profile.findOne(query, function(err, user){
+      if(err) return done(err);
+      if(user) {
+        extend(user,profile);
+        user.save(function(err, user){
+          if(err) return done(err);
+          done(null, user);
+        });
+      } else {
+        // New user, create
+        Profile.create(
+          extend({},profile),
+          function(err, user){
+            if(err) return done(err);
+            done(null, user);
+          }
+        );
+      }
+    });
+};
 
 module.exports = mongoose.model('Profile', ProfileSchema);

@@ -19,13 +19,18 @@ module.exports = function (app) {
 
   // Run prelim check for forbidden requests
   app.use(function(req, res, next) {
-    // Do not allow POST requests to /celebrities/ if running in demo mode
-    if (req.method === 'POST' && req.url.substring(0, 13) === '/celebrities/' && Number(process.env.DEMO)) {
+    // Do not allow POST requests to route '/celebrities/...'
+    // when app is living in cloud platform
+    if ( Number(process.env.DEMO) &&
+         req.method === 'POST' &&
+         /^\/celebrities\/.*/i.test(req.url) ) {
+
       var error = {
         code: 403,
         error: 'POST requests to /celebrities/ are forbidden',
         url: req.url
       };
+
       console.log('error:', error);
       res.status(403).json(error);
     }

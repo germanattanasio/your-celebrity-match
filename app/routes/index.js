@@ -16,6 +16,23 @@
 'use strict';
 
 module.exports = function (app) {
+
+  // Run prelim check for forbidden requests
+  app.use(function(req, res, next) {
+    // Do not allow POST requests to /celebrities/ if running in demo mode
+    if (req.method === 'POST' && req.url.substring(0, 13) === '/celebrities/' && Number(process.env.DEMO)) {
+      var error = {
+        code: 403,
+        error: 'POST requests to /celebrities/ are forbidden',
+        url: req.url
+      };
+      console.log('error:', error);
+      res.status(403).json(error);
+    }
+    else
+      next();
+  });
+
   app.use('/celebrities', require('./celebrities'));
   app.use('/', require('./user'));
 

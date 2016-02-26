@@ -78,11 +78,11 @@ This instructions will help you install the celebrities app in your local enviro
     $ node app.js
     ```
 
-1. Update the database with the celebrities by going to:
+1. Update the database with the celebrities by making a POST request to:
 
     `http://localhost:3000/celebrities/syncdb`
     
-1. You can add additional celebrities to the database as long as they are verified, have at least 10,000 followers, and have over 1,000 tweets. To add another celebrity, call:
+1. You can add additional celebrities to the database as long as they are verified, have at least 10,000 followers, and have over 1,000 tweets. To add another celebrity, make a POST request to:
 
 	```
 	http://localhost:3000/celebrities/add/@username
@@ -126,7 +126,7 @@ You need to copy `username`, `password`.
 
 ### Auto-Lookup
 1. 	Choose a person on Twitter to include as a 'celebrity'. Ensure this person is verified, has at least 10,000 followers, and has over 1,000 tweets.
-2. Make a call to:
+2. Make a POST request to:
 
 	```
 	http://localhost:3000/celebrities/add/@username
@@ -136,7 +136,9 @@ You need to copy `username`, `password`.
 ### SyncDB
   1. Choose a person to include as a 'celebrity'. You need at least 100 different words written by that person. Blog posts, tweets, text messages, emails will work.
   1. Get the profile by using the [Personality Insights][pi_docs] service with the text you have and save the json profile in the `profiles` folder. Make sure the file has the `.json` extension as in the examples provided.
-  1. Start the app and go to: `http://localhost:3000/celebrities/syncdb`. It will repopulate the application database and add the new profile. Be aware that this command will erase all celebrities previously added to the database.
+  1. Start the app and make a POST request to: `http://localhost:3000/celebrities/syncdb`. It will repopulate the application database and add the new profile. Be aware that this command will erase all celebrities previously added to the database.
+
+**Note**: In order to add celebrities, you must not be running the app in demo mode. Either run the app locally or set the `DEMO` environment variable to `0` when running the app on Bluemix.
 
 ## License
 

@@ -58,13 +58,14 @@ var jsonProfiles = function(text) {
 /**
  * Validate twitter usernames
 */
-router.get('/syncdb', function (req, res) {
+router.post('/syncdb', function (req, res) {
   console.log('update celebrity database');
   var removeAll = Q.denodeify(Profile.remove.bind(Profile)),
     getFiles = Q.denodeify(fs.readdir),
     getUsers = Q.denodeify(req.twit.getUsers.bind(req.twit)),
     getFile = Q.denodeify(fs.readFile);
 
+  var newUsers;
   removeAll({})
   .then(function() {
     return getFiles('./profiles');
@@ -89,56 +90,38 @@ router.get('/syncdb', function (req, res) {
     usersArray.forEach(function(_users){
       users = users.concat(_users);
     });
+    newUsers = usersArray;
 
-    console.log(users.length);
-      return Q.all(users.map(function(u){
-        getFile('./profiles/'+u.id+'.json')
-        .then(function(profileJson) {
-          u.profile = profileJson;
-          return Profile.create(u).exec();
-        });
-      }));
+    return Q.all(users.map(function(u){
+      getFile('./profiles/'+u.id+'.json')
+      .then(function(profileJson) {
+        u.profile = profileJson;
+        return Profile.create(u).exec();
+      });
+    }));
   })
   .then(function(){
-    res.redirect('/celebrities');
+    res.json({success:true, profiles:newUsers});
   })
   .catch(function (error) {
     console.log('error', error);
-    res.render('celebrities',{error: error});
+    res.json({success:false, error:error});
   });
-});
-
-/**
- * Helper routers for adding/removing celebrities
-*/
-router.post('/add/', function(req, res) {
-  var username = req.body.username;
-  if (username && username.substr(0,1) !== '@') {
-    username = '@' + username;
-  }
-  res.redirect(username ? '/add/' + username : '/');
-});
-
-router.post('/remove/', function(req, res) {
-  var username = req.body.username;
-  if (username && username.substr(0,1) !== '@') {
-    username = '@' + username;
-  }
-  res.redirect(username ? '/remove/' + username : '/');
 });
 
 /**
  * Add a celebrity to the list
 */
-router.get('/add/@:username', function(req,res) {
+router.post('/add/@:username', function(req,res) {
   var username = req.params.username;
+  console.log(username);
   // Check if the user exists
   Profile.findOne({username:username}, function(err,profile) {
     if (err)
-      res.render('celebrities',{error: err});
+      res.json({success:false, error: err});
     else if (profile) {
       console.log('User is already in the database');
-      res.redirect('../');
+      res.json({success:false, error: 'User is already in the database'});
     }
     else {
       // Check if the user is verified, >10k followers, and >1k tweets
@@ -146,9 +129,9 @@ router.get('/add/@:username', function(req,res) {
       showUser(username)
       .then(function(user) {
         if (!user.verified || user.tweets < 1000 || user.followers < 10000)
-          res.render('celebrities',{error: 'User does not qualify as a celebrity'});
+          res.json({success:false, error: 'User does not qualify as a celebrity'});
         else if (user.protected)
-          res.render('celebrities',{error: 'User is protected and cannot be added'});
+          res.json({success:false, error: 'User is protected and cannot be added'});
         else {
           // Get the tweets, profile and add him to the database
           var getTweets = Q.denodeify(req.twit.getTweets.bind(req.twit));
@@ -170,7 +153,7 @@ router.get('/add/@:username', function(req,res) {
           })
           .then(function(dbUser) {
             if (!dbUser) return;
-            res.redirect('../');
+            res.json({success:true, profile: dbUser});
 
             // return null because we already fulfill the response
             return null;
@@ -193,7 +176,7 @@ router.get('/add/@:username', function(req,res) {
         }
 
       res.status(status);
-      res.render('celebrities',{error: err});
+      res.json({success:false, error: err});
 
       // return null because we already fulfill the response
       return null;
@@ -205,26 +188,15 @@ router.get('/add/@:username', function(req,res) {
 /**
  * Render the celebrity list
 */
-router.get('/remove/@:username', function(req,res) {
+router.post('/remove/@:username', function(req,res) {
   var username = req.params.username;
   Profile.remove({username:username},function(err, result){
     if (err)
-      res.render('celebrities',{error: err});
+      res.json({success:false, error: err});
     else {
-      res.redirect('../');
+      res.json({success:true, username: username});
     }
   });
-});
-
-/**
- * Helper routers for adding/removing celebrities
-*/
-router.get('/add/:username', function(req, res) {
-  res.redirect('/celebrities/add/@' + req.params.username);
-});
-
-router.get('/remove/:username', function(req, res) {
-  res.redirect('/celebrities/remove/@' + req.params.username);
 });
 
 module.exports = router;

@@ -24,7 +24,7 @@ var router = require('express').Router(),
 
 /**
  * Render the celebrity list
-*/
+ */
 router.get('/', function(req,res) {
   Profile.find({},function(err,profiles){
     if (err)
@@ -36,7 +36,7 @@ router.get('/', function(req,res) {
 
 /**
  * Render the celebrity list
-*/
+ */
 router.get('/users', function(req,res) {
   User.find({},function(err,profiles){
     if (err)
@@ -57,14 +57,15 @@ var jsonProfiles = function(text) {
 
 /**
  * Validate twitter usernames
-*/
-router.get('/syncdb', function (req, res) {
+ */
+router.post('/syncdb', function (req, res) {
   console.log('update celebrity database');
   var removeAll = Q.denodeify(Profile.remove.bind(Profile)),
     getFiles = Q.denodeify(fs.readdir),
     getUsers = Q.denodeify(req.twit.getUsers.bind(req.twit)),
     getFile = Q.denodeify(fs.readFile);
 
+  var newUsers;
   removeAll({})
   .then(function() {
     return getFiles('./profiles');
@@ -89,22 +90,112 @@ router.get('/syncdb', function (req, res) {
     usersArray.forEach(function(_users){
       users = users.concat(_users);
     });
+    newUsers = usersArray;
 
-    console.log(users.length);
-      return Q.all(users.map(function(u){
-        getFile('./profiles/'+u.id+'.json')
-        .then(function(profileJson) {
-          u.profile = profileJson;
-          return Profile.create(u).exec();
-        });
-      }));
+    return Q.all(users.map(function(u){
+      getFile('./profiles/'+u.id+'.json')
+      .then(function(profileJson) {
+        u.profile = profileJson;
+        return Profile.create(u).exec();
+      });
+    }));
   })
   .then(function(){
-    res.redirect('/celebrities');
+    res.json({success:true, profiles:newUsers});
   })
   .catch(function (error) {
     console.log('error', error);
-    res.render('celebrities',{ error: error});
+    res.json({success:false, error:error});
+  });
+});
+
+/**
+ * Add a celebrity to the list
+ */
+router.post('/add/@:username', function(req,res) {
+  var username = req.params.username;
+  console.log(username);
+  // Check if the user exists
+  Profile.findOne({username:username}, function(err,profile) {
+    if (err)
+      res.json({success:false, error: err});
+    else if (profile) {
+      console.log('User is already in the database');
+      res.json({success:false, error: 'User is already in the database'});
+    }
+    else {
+      // Check if the user is verified, >10k followers, and >1k tweets
+      var showUser = Q.denodeify(req.twit.showUser.bind(req.twit));
+      showUser(username)
+      .then(function(user) {
+        if (!user.verified || user.tweets < 1000 || user.followers < 10000)
+          res.json({success:false, error: 'User does not qualify as a celebrity'});
+        else if (user.protected)
+          res.json({success:false, error: 'User is protected and cannot be added'});
+        else {
+          // Get the tweets, profile and add him to the database
+          var getTweets = Q.denodeify(req.twit.getTweets.bind(req.twit));
+          return getTweets(username)
+          .then(function(tweets) {
+            console.log(username, 'has', tweets.length, 'tweets');
+            var getProfile = Q.denodeify(req.personality_insights.profile.bind(req.personality_insights));
+            return getProfile({contentItems:tweets})
+            .then(function(profile) {
+              if (!profile)
+                return;
+              console.log(username, 'analyze with personality insights');
+
+              console.log(username, 'added to the database');
+              user.profile = JSON.stringify(profile);
+              var saveProfileInDB = Q.denodeify(Profile.createOrUpdate.bind(Profile));
+              return saveProfileInDB(user);
+            });
+          })
+          .then(function(dbUser) {
+            if (!dbUser) return;
+            res.json({success:true, profile: dbUser});
+
+            // return null because we already fulfill the response
+            return null;
+          });
+        }
+      })
+      .catch(function (error) {
+        console.log('catch():', error);
+        var err,
+          status = 500;
+        if (error.statusCode === 429)
+          err = 'Twitter rate limit exceeded, come back in 15 minutes.';
+        else if (error.statusCode === 503)
+          err = 'The Twitter servers are overloaded with requests. Try again later.';
+        else if (error.statusCode === 404) {
+          err = 'Sorry, @' + username + ' does not exist.';
+          status = 404;
+        } else {
+          err = 'Sorry, there was an error. Please try again later.';
+        }
+
+      res.status(status);
+      res.json({success:false, error: err});
+
+      // return null because we already fulfill the response
+      return null;
+      });
+    }
+  });
+});
+
+/**
+ * Render the celebrity list
+ */
+router.post('/remove/@:username', function(req,res) {
+  var username = req.params.username;
+  Profile.remove({username:username},function(err, result){
+    if (err)
+      res.json({success:false, error: err});
+    else {
+      res.json({success:true, username: username});
+    }
   });
 });
 

@@ -24,7 +24,7 @@ var router = require('express').Router(),
 
 /**
  * Render the celebrity list
-*/
+ */
 router.get('/', function(req,res) {
   Profile.find({},function(err,profiles){
     if (err)
@@ -36,7 +36,7 @@ router.get('/', function(req,res) {
 
 /**
  * Render the celebrity list
-*/
+ */
 router.get('/users', function(req,res) {
   User.find({},function(err,profiles){
     if (err)
@@ -57,7 +57,7 @@ var jsonProfiles = function(text) {
 
 /**
  * Validate twitter usernames
-*/
+ */
 router.post('/syncdb', function (req, res) {
   console.log('update celebrity database');
   var removeAll = Q.denodeify(Profile.remove.bind(Profile)),
@@ -111,7 +111,7 @@ router.post('/syncdb', function (req, res) {
 
 /**
  * Add a celebrity to the list
-*/
+ */
 router.post('/add/@:username', function(req,res) {
   var username = req.params.username;
   console.log(username);
@@ -187,7 +187,7 @@ router.post('/add/@:username', function(req,res) {
 
 /**
  * Render the celebrity list
-*/
+ */
 router.post('/remove/@:username', function(req,res) {
   var username = req.params.username;
   Profile.remove({username:username},function(err, result){

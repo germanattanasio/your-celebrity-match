@@ -78,7 +78,7 @@ This instructions will help you install the celebrities app in your local enviro
     $ node app.js
     ```
 
-1. Update the database with the celebrities by making a POST request to:
+1. Update the database with the celebrities by making a **POST** request to:
 
     `http://localhost:3000/celebrities/syncdb`
     

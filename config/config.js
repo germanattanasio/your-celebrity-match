@@ -30,9 +30,9 @@ module.exports = {
 
   // Twitter app credentials: https://apps.twitter.com/app
   twitter: process.env.TWITTER ? JSON.parse(process.env.TWITTER) : [{
-    consumer_key: '<consumer_key>',
-    consumer_secret: '<consumer_secret>',
-    access_token_key: '<access_token_key>',
-    access_token_secret: '<access_token_secret>'
+    consumer_key: 'aZL4FHo19lLD0kyDvFCMi8hhb',
+    consumer_secret: '6LQsuP85P202s4W5LwTm4W0yQFYG8Hx6ttXiZ8FV7ZSghzaMq5',
+    access_token_key: '14554287-z7A1mlNHy2jyy2rBMdq0PgymNdw7uftSAWyZChSAU',
+    access_token_secret: '6i6kMYHmvlEUiMYCsLz0NOB7sV5Ed5xgvIfyELIp89caR'
   }]
 };

@@ -22,9 +22,9 @@ module.exports = {
 
   // Personality Insights credentials
   personality_insights: {
-    url: '<url>',
-    username: '<username>',
-    password: '<password>',
+    url: "https://gateway.watsonplatform.net/personality-insights/api",
+    username: "35dc9810-bed6-401d-a011-b236dfc9ad3f",
+    password: "QxRmglCc6koE",
     version: 'v2'
   },
 

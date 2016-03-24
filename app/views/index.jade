@@ -40,6 +40,16 @@ block content
             span.h3 @
             input.paragraph.form-control(type='text', value='#{user ? user.screen_name : "" }', name='username', placeholder='your twitter handle...', required)
             button.button.h4.tryButton(type='submit') Match me!
+    .row.sub-text
+      .col-md-12
+        h4
+          | Or try using your Instagram handle
+    form(method='post', action='/insta')
+      .row.twitter-submission
+        .col-md-12
+            span.h3 @
+            input.paragraph.form-control(type='text', autocomplete='off', autocorrect='off', autocapitalize='off', spellcheck='false', value='#{user ? user.screen_name : "" }', name='username', placeholder='your Instagram ID...', required)
+            button.button.h4.tryButton(type='submit') Try Instagram!
     if error
       .row
         .col-md-12

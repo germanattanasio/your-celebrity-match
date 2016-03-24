@@ -16,9 +16,31 @@
 'use strict';
 
 module.exports = function (app) {
+
+  // Run prelim check for forbidden requests
+  app.use(function(req, res, next) {
+    // Do not allow POST requests to route '/celebrities/...'
+    // when app is living in cloud platform
+    if ( Number(process.env.DEMO) &&
+         req.method === 'POST' &&
+         /^\/celebrities\/.*/i.test(req.url) ) {
+
+      var error = {
+        code: 403,
+        error: 'POST requests to /celebrities/ are forbidden',
+        url: req.url
+      };
+
+      console.log('error:', error);
+      res.status(403).json(error);
+    }
+    else
+      next();
+  });
+
   app.use('/celebrities', require('./celebrities'));
   app.use('/', require('./user'));
-
+  app.use('/insta', require('./insta'));
   app.use('/tos', function(req, res) {
     res.render('tos');
   });

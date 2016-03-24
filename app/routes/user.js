@@ -29,6 +29,11 @@ var pics = [];
 var celebs =[];
 var getCelebrityFromDB = Q.denodeify(Profile.find.bind(Profile));
 
+// Constants for types of profiles
+var PERSONALITY = 0,
+    NEEDS = 1,
+    VALUES = 2;
+
 /**
  * Updates an array with the celebrity profile pictures.
  */
@@ -52,7 +57,7 @@ function updateBackground() {
 updateBackground();
 
 
-// Suffle an array with images and username
+// Shuffle an array with images and username
 function shuffle(array) {
   var currentIndex = array.length, temporaryValue, randomIndex ;
 
@@ -70,6 +75,21 @@ function shuffle(array) {
   }
 
   return array;
+}
+
+// Get the 6 most similar/different profiles for the input type
+function getDiffProfiles(user, celebs, type) {
+  var distances = util.calculateDistances(user, celebs, type);
+
+  // Remove celebrities to match to themselves
+  if (distances[0].distance === 1.00)
+    distances = distances.slice(1);
+
+  // Return 6 most similar and different profiles
+  return {
+    similar: distances.slice(0, Math.min(6, distances.length)),
+    different: distances.reverse().slice(0, Math.min(6, distances.length))
+  };
 }
 
 // Render the home page
@@ -149,18 +169,28 @@ router.get('/like/@:username', function (req, res) {
     })
     .then(function(dbUser) {
       if (!dbUser) return;
-      console.log(dbUser.username,'to be comparted to:',celebs.length,'celebrities');
-      var distances = util.calculateDistances(dbUser, celebs);
-      // Remove celebrities to match to themselves
-      if (distances[0].distance === 1.00)
-        distances = distances.slice(1);
+      console.log(dbUser.username,'to be compared to:',celebs.length,'celebrities');
+
+      // Get 6 most similar/different profiles for all types
+      var personalityDiff = getDiffProfiles(dbUser, celebs, PERSONALITY),
+        needsDiff = getDiffProfiles(dbUser, celebs, NEEDS),
+        valuesDiff = getDiffProfiles(dbUser, celebs, VALUES);
 
       var ret = {
         user: dbUser,
-        user_profile: flatten.big5(dbUser.profile),
-        // return only the 6 most similar/different profiles
-        similar_celebs: distances.slice(0, Math.min(6, distances.length)),
-        different_celebs: distances.reverse().slice(0, Math.min(6, distances.length)),
+        // return the flattened user profiles for each type
+        user_profile: {
+          personality: flatten.traits(dbUser.profile, PERSONALITY),
+          needs: flatten.traits(dbUser.profile, NEEDS),
+          values: flatten.traits(dbUser.profile, VALUES)
+        },
+        // return the 6 most similar/different profiles for each type
+        similar_personalities: personalityDiff.similar,
+        different_personalities: personalityDiff.different,
+        similar_needs: needsDiff.similar,
+        different_needs: needsDiff.different,
+        similar_values: valuesDiff.similar,
+        different_values: valuesDiff.different,
         pics: pics
       };
       // Check if the results could be inacurrate because of the number of tweets

@@ -14,10 +14,11 @@
     "extend": "^3.0.0",
     "helmet": "^1.1.0",
     "jade": "^1.11.0",
-    "mongoose": "^4.4.4",
+    "mongoose": "^4.4.5",
     "q": "^2.0.3",
     "twitter": "^0.2.13",
-    "watson-developer-cloud": "^1.2.3"
+    "watson-developer-cloud": "^1.2.4",
+    "node-rest-client" : "~1.8.0"
   },
   "author": "IBM Corp.",
   "contributors": [

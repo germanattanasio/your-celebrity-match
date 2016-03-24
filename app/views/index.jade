@@ -2,8 +2,28 @@ extends ./layout.jade
 
 block extra-header
   link(rel='stylesheet', href='/css/index.css')
+  link(rel='stylesheet', href='/css/page.css')
+block extra-scripts
+  script(type="text/javascript", src="/js/index-page.js")
 
 block content
+  .overlay-screen.how-it-worked(style='display: none')
+    .container
+      .row.sub-text
+        .col-md-12
+          h4#loading
+      .row
+        .col-md-8
+          h3 How does this app analyze your personality?
+          p Your Celebrity Match will extracts images from your instagram or tweets, then uses the 
+            a(href='http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/alchemy-vision.html') IBM Watson AlchemyVision
+            |  to analyze the images and apply it to a spectrum of characteristics. If you do not have enough images in your Twitter feed, then it will use  
+            a(href='https://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/personality-insights.html') IBM Watson Personality Insights service
+            |  to analyze the texts from your tweets to predict your personality.
+          h3 What do the personality score mean?
+          p These personality traits are drawn from 
+            a(href='https://en.wikipedia.org/wiki/Big_Five_personality_traits') the Big Five of personality traits
+            | .
   .container
     .row
       .col-md-8.col-md-push-2
@@ -19,7 +39,7 @@ block content
         .col-md-12
             span.h3 @
             input.paragraph.form-control(type='text', value='#{user ? user.screen_name : "" }', name='username', placeholder='your twitter handle...', required)
-            button.button.h4(type='submit') Match me!
+            button.button.h4.tryButton(type='submit') Match me!
     if error
       .row
         .col-md-12
@@ -79,6 +99,3 @@ block content
 
 // No footer on this page
 block footer
-
-block extra-scripts
-  script(type='text/javascript', src='/js/index-page.js')

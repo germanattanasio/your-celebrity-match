@@ -24,3 +24,7 @@ $('.celeb-img img').on('load', function() {
 		$(this).load();
 	}
 });
+
+$('form').submit(function() {
+	$('.loading').addClass('show');
+});

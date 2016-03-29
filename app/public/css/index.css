@@ -89,6 +89,20 @@ a:hover, a:focus {
 .twitter-submission input:-webkit-input-placeholder { color: #b3b3b3; }
 .twitter-submission input:-moz-input-placeholder { color: #b3b3b3; }
 .twitter-submission input:-ms-input-placeholder { color: #b3b3b3; }
+.twitter-submission .loading {
+  display: block;
+  width: 2rem;
+  height: auto;
+  margin: 1rem auto;
+  display: none;
+}
+.twitter-submission .loading.show {
+  display: block;
+}
+.twitter-submission .loading img {
+  width: 100%;
+  height: auto;
+}
 
 .alert {
   text-align: center;

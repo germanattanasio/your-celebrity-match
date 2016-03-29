@@ -17,9 +17,11 @@ block content
     form(method='post', action='/')
       .row.twitter-submission
         .col-md-12
-            span.h3 @
-            input.paragraph.form-control(type='text', value='#{user ? user.screen_name : "" }', name='username', placeholder='your twitter handle...', required)
-            button.button.h4(type='submit') Match me!
+          span.h3 @
+          input.paragraph.form-control(type='text', value='#{user ? user.screen_name : "" }', name='username', placeholder='your twitter handle...', required)
+          button.button.h4(type='submit') Match me!
+          .loading
+            img(src='/images/loading.gif', alt='loading')
     if error
       .row
         .col-md-12

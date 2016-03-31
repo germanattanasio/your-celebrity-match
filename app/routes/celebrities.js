@@ -114,6 +114,8 @@ router.post('/syncdb', function (req, res) {
  */
 router.post('/add/@:username', function(req,res) {
   var username = req.params.username;
+  var getProfile = Q.denodeify(req.personality_insights.profile.bind(req.personality_insights));
+
   console.log(username);
   // Check if the user exists
   Profile.findOne({username:username}, function(err,profile) {
@@ -138,7 +140,6 @@ router.post('/add/@:username', function(req,res) {
           return getTweets(username)
           .then(function(tweets) {
             console.log(username, 'has', tweets.length, 'tweets');
-            var getProfile = Q.denodeify(req.personality_insights.profile.bind(req.personality_insights));
             return getProfile({contentItems:tweets})
             .then(function(profile) {
               if (!profile)
@@ -190,7 +191,7 @@ router.post('/add/@:username', function(req,res) {
  */
 router.post('/remove/@:username', function(req,res) {
   var username = req.params.username;
-  Profile.remove({username:username},function(err, result){
+  Profile.remove({username:username},function(err){
     if (err)
       res.json({success:false, error: err});
     else {

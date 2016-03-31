@@ -4,10 +4,14 @@
   "description": "your-celebrity-match uses the Personality Insights service to find a celebrity similar to you based off of your online presence",
   "private": true,
   "scripts": {
-    "start": "node app.js"
+    "start": "node server.js",
+    "test": "npm run jshint && (npm run codecov || true)",
+    "jshint": "jshint --exclude ./node_modules/",
+    "codecov": "istanbul cover ./node_modules/mocha/bin/_mocha && codecov"
   },
   "dependencies": {
     "body-parser": "^1.14.2",
+    "cf-deployment-tracker-client": "0.0.8",
     "express": "^4.13.4",
     "express-rate-limit": "^2.1.0",
     "express-secure-only": "^0.2.1",
@@ -18,6 +22,14 @@
     "q": "^2.0.3",
     "twitter": "^0.2.13",
     "watson-developer-cloud": "^1.2.4"
+  },
+  "devDependencies": {
+    "codecov": "^1.0.1",
+    "istanbul": "^0.4.2",
+    "jshint": "^2.9.1",
+    "mocha": "^2.4.5",
+    "nock": "^7.7.2",
+    "supertest": "^1.2.0"
   },
   "author": "IBM Corp.",
   "contributors": [
@@ -35,6 +47,6 @@
     "url": "https://github.com/watson-developer-cloud/yourcelebritymatch/issues"
   },
   "engines": {
-    "node": ">=0.12.0"
+    "node": ">=4.3.0"
   }
 }

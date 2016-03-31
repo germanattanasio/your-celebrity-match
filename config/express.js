@@ -21,8 +21,9 @@ var express    = require('express'),
   bodyParser   = require('body-parser');
 
 module.exports = function (app) {
-  // Only loaded when SECURE_EXPRESS is `true`
-  if (Number(process.env.SECURE_EXPRESS))
+  // When running in Bluemix add rate-limitation
+  // and some other features around security
+  if (process.env.VCAP_APPLICATION)
     require('./security')(app);
 
   // Setup static public directory

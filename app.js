@@ -69,8 +69,4 @@ require('./app/routes/index')(app);
 // Global error handler
 require('./config/error-handler')(app);
 
-
-// Start the server
-var port = (process.env.VCAP_APP_PORT || 3000);
-app.listen(port);
-console.log('App listening on:', port);
+module.exports = app;

@@ -19,6 +19,8 @@
 // security.js
 var secure     = require('express-secure-only'),
   rateLimit    = require('express-rate-limit'),
+  csrf         = require('csurf'),
+  cookieParser = require('cookie-parser'),
   helmet       = require('helmet');
 
 module.exports = function (app) {
@@ -28,18 +30,24 @@ module.exports = function (app) {
   app.use(secure());
 
   // 2. helmet with defaults
-  app.use(helmet());
+  app.use(helmet({ cacheControl: false }));
 
-  // 3. rate limiting
-  var limiter = rateLimit({
+  // 3. rate-limit to /api/
+  app.use('/like/', rateLimit({
     windowMs: 30 * 1000, // seconds
     delayMs: 0,
-    max: 10,
-    message: JSON.stringify({
-      error:'Too many requests, please try again in 30 seconds.',
-      code: 429
-    }),
+    max: 5
+  }));
+
+  // 4. setup cookies
+  var secret = Math.random().toString(36).substring(7);
+  app.use(cookieParser(secret));
+
+  // 5. csrf
+  var csrfProtection = csrf({ cookie: true });
+  app.get('/', csrfProtection, function(req, res, next) {
+    req._csrfToken = req.csrfToken();
+    next();
   });
 
-  app.use('/like/', limiter);
 };

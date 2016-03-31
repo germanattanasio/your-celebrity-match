@@ -16,7 +16,8 @@ before_deploy: npm install -g cf-blue-green
 deploy:
   provider: script
   script:
-    - cf-blue-green-travis
+    - echo "cf-blue-green-travis"
+    - echo "do not run blue green until cf issue is fixed"
   on:
     branch: master
     repo: watson-developer-cloud/your-celebrity-match

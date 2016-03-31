@@ -1,4 +1,5 @@
 # your-celebrity-match
+[![Build Status](https://travis-ci.org/watson-developer-cloud/your-celebrity-match.svg?branch=master)](https://travis-ci.org/watson-developer-cloud/your-celebrity-match)
 
 The application uses IBM Watson [Personality Insights][pi_docs] and Twitter to find the celebrities that are similar to your personality. Twitter is being use to get the tweets for a given handler, the text from those tweets is send to Personality Insights, who analyze the text and reply with a personality profile. That profile is compared to celebrity profiles to find the most similar.
 
@@ -10,10 +11,10 @@ Give it a try! Click the button below to fork into IBM DevOps Services and deplo
 
 # How it works
 
-Steps | 
+Steps |
 :------------: |
 <img src="http://s7.postimg.org/odqyly6vv/1_enter_handle.gif" alt="You input your Twitter handle" width="100px" height="100px"><br>You input your Twitter handle.<br> |
-<img src="http://s7.postimg.org/ag8sgn8t7/2_twitter_feed.gif" alt="Calls the Twitter API." width="100px" height="100px"><br> Calls the Twitter API to get the latest 2300 tweets from your public feed.<br> | 
+<img src="http://s7.postimg.org/ag8sgn8t7/2_twitter_feed.gif" alt="Calls the Twitter API." width="100px" height="100px"><br> Calls the Twitter API to get the latest 2300 tweets from your public feed.<br> |
 <img src="http://s7.postimg.org/ltvbrujbv/3_UM_api.gif" alt="Calls the Personality Insights API." width="100px" height="100px"><br> Calls the Personality Insights API to analyze the language in your tweets and apply it to a spectrum of characteristics.<br> |
 <img src="http://s7.postimg.org/nmy8g64ij/4_compare_results.gif" alt="Compares your Personality Insights profile to 232 celebrity profiles analyzed with the service." width="100px" height="100px"><br> Compares your Personality Insights profile to 232 celebrity profiles analyzed with the service.<br> |
 <img src="http://s7.postimg.org/we59afntn/5_celeb_match.png" alt="Sorts your matches and shows you the highest and lowest. These are calculated by the euclidean distance between the two." width="100px" height="100px"><br> Sorts your matches and shows you the highest and lowest. These are calculated by the euclidean distance between the two.<br> |
@@ -81,7 +82,7 @@ This instructions will help you install the celebrities app in your local enviro
 1. Update the database with the celebrities by making a **POST** request to:
 
     `http://localhost:3000/celebrities/syncdb`
-    
+
 1. You can add additional celebrities to the database as long as they are verified, have at least 10,000 followers, and have over 1,000 tweets. To add another celebrity, make a POST request to:
 
 	```

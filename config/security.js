@@ -19,8 +19,6 @@
 // security.js
 var secure     = require('express-secure-only'),
   rateLimit    = require('express-rate-limit'),
-  csrf         = require('csurf'),
-  cookieParser = require('cookie-parser'),
   helmet       = require('helmet');
 
 module.exports = function (app) {
@@ -38,16 +36,5 @@ module.exports = function (app) {
     delayMs: 0,
     max: 5
   }));
-
-  // 4. setup cookies
-  var secret = Math.random().toString(36).substring(7);
-  app.use(cookieParser(secret));
-
-  // 5. csrf
-  var csrfProtection = csrf({ cookie: true });
-  app.get('/', csrfProtection, function(req, res, next) {
-    req._csrfToken = req.csrfToken();
-    next();
-  });
 
 };

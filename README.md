@@ -76,7 +76,7 @@ This instructions will help you install the celebrities app in your local enviro
 1. Start the app
 
     ```sh
-    $ node app.js
+    $ npm start
     ```
 
 1. Update the database with the celebrities by making a **POST** request to:

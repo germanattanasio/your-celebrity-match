@@ -9,6 +9,9 @@ Give it a try! Click the button below to fork into IBM DevOps Services and deplo
 [![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/watson-developer-cloud/yourcelebritymatch)  
 **Note**: Once you deploy the application in Bluemix you will need to do some extra steps described below to setup the database and Twitter API credentials.
 
+# API Reference:
+The application uses [The Personality Insights API](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/personality-insights/api/v2/)
+
 # How it works
 
 Steps |
@@ -82,6 +85,8 @@ This instructions will help you install the celebrities app in your local enviro
 1. Update the database with the celebrities by making a **POST** request to:
 
     `http://localhost:3000/celebrities/syncdb`
+
+    The celebrities are not added by default. Hence the above step is recommended. Refer #Celebrities section below for more information.
 
 1. You can add additional celebrities to the database as long as they are verified, have at least 10,000 followers, and have over 1,000 tweets. To add another celebrity, make a POST request to:
 

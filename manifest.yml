@@ -12,5 +12,4 @@ applications:
   path: .
   memory: 512M
   env:
-    SECURE_EXPRESS: 1
     DEMO: 1

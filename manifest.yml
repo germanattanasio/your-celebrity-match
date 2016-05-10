@@ -6,7 +6,7 @@ declared-services:
 
 applications:
 - services:
-  - personality-insights-service
+  - personality-insights-service-standard
   name: your-celebrity-match
   command: npm start
   path: .

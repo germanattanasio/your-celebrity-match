@@ -1,6 +1,6 @@
 ---
 declared-services:
-  personality-insights-service-standard:
+  personality-insights-service:
     label: personality_insights
     plan: tiered
 
@@ -12,6 +12,5 @@ applications:
   path: .
   memory: 512M
   env:
-    NODE_ENV: production
     SECURE_EXPRESS: 1
     DEMO: 1

@@ -2,7 +2,7 @@
 declared-services:
   personality-insights-service-standard:
     label: personality_insights
-    plan: tiered
+    plan: 'tiered'
 
 applications:
 - services:

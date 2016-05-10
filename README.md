@@ -6,7 +6,7 @@ The application uses IBM Watson [Personality Insights][pi_docs] and Twitter to f
 Live demo: http://your-celebrity-match.mybluemix.net/
 
 Give it a try! Click the button below to fork into IBM DevOps Services and deploy your own copy of this application on Bluemix.  
-[![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/watson-developer-cloud/yourcelebritymatch)  
+[![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/hobertbush/your-celebrity-match)  
 **Note**: Once you deploy the application in Bluemix you will need to do some extra steps described below to setup the database and Twitter API credentials.
 
 # API Reference:

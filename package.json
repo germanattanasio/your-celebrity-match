@@ -46,6 +46,10 @@
   "bugs": {
     "url": "https://github.com/watson-developer-cloud/yourcelebritymatch/issues"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/watson-developer-cloud/your-celebrity-match.git"
+  },
   "engines": {
     "node": ">=4.3.0"
   }

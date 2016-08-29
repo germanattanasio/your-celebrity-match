@@ -87,7 +87,7 @@ This instructions will help you install the celebrities app in your local enviro
     `http://localhost:3000/celebrities/syncdb`
 
     The celebrities are not added by default. Hence the above step is recommended. Refer #Celebrities section below for more information.
-
+    When running in bluemix make sure the environment variable `DEMO` is set to `0`.
 1. You can add additional celebrities to the database as long as they are verified, have at least 10,000 followers, and have over 1,000 tweets. To add another celebrity, make a POST request to:
 
 	```

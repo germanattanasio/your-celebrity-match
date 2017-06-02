@@ -53,7 +53,7 @@ This instructions will help you install the celebrities app in your local enviro
 
 1. You need some credentials to use Twitter API, Personality Insights and MongoDC:
   * Get credentials to use Personality Insights, instructions [here][pi_cred].  
-  * Create a **FREE** Mongodb database using [MongoLab](https://mongolab.com).  
+  * Create a **FREE** Mongodb database using [MongoLab](https://mlab.com/).  
   * Create a Twitter app and get the API credentials [here][twitter_app].
 1. Update the Twitter, MongoDB and Personality Insights credentials in `config/config.js`
 

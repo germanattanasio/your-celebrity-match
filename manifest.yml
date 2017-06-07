@@ -2,11 +2,11 @@
 declared-services:
   personality-insights-service:
     label: personality_insights
-    plan: tiered
+    plan: 'tiered'
 
 applications:
 - services:
-  - personality-insights-service
+  - personality-insights-service-standard
   name: your-celebrity-match
   command: npm start
   path: .

@@ -10,25 +10,25 @@
     "codecov": "istanbul cover ./node_modules/mocha/bin/_mocha && codecov"
   },
   "dependencies": {
-    "body-parser": "^1.15.2",
-    "cf-deployment-tracker-client": "^0.x",    
-    "express": "^4.14.0",
-    "express-rate-limit": "^2.6.0",
+    "body-parser": "^1.18.2",
+    "cf-deployment-tracker-client": "^0.1.3",
+    "express": "^4.16.2",
+    "express-rate-limit": "^2.9.0",
     "express-secure-only": "^0.2.1",
-    "extend": "^3.0.0",
-    "helmet": "^3.4.0",
+    "extend": "^3.0.1",
+    "helmet": "^3.9.0",
     "jade": "^1.11.0",
-    "mongoose": "^4.7.6",
+    "mongoose": "^4.12.2",
     "q": "^2.0.3",
     "twitter": "^0.2.13",
-    "watson-developer-cloud": "^2.14.6"
+    "watson-developer-cloud": "^2.41.1"
   },
   "devDependencies": {
-    "codecov": "^1.0.1",
+    "codecov": "^2.3.1",
     "istanbul": "^0.4.5",
-    "jshint": "^2.9.4",
-    "mocha": "^3.2.0",
-    "nock": "^9.0.2",
+    "jshint": "^2.9.5",
+    "mocha": "^4.0.1",
+    "nock": "^9.0.22",
     "supertest": "^2.0.1"
   },
   "author": "IBM Corp.",

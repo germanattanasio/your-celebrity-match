@@ -1,6 +1,5 @@
 language: node_js
-sudo: true
 node_js:
-- stable
+- 7
 script:
 - npm test

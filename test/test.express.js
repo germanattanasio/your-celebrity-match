@@ -32,4 +32,7 @@ describe('express', function() {
   it('404 when page not found', function(done) {
     request(app).get('/foo/bar').expect(404, done);
   });
+  after(function(){
+    process.exit(0);
+  })
 });

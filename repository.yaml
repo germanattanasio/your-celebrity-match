@@ -1,0 +1,8 @@
+id: https://github.com/watson-developer-cloud/your-celebrity-match
+runtimes:
+ - Cloud Foundry
+services:
+ - personality_insights
+event_id: web
+event_organizer: watson-devexp
+language: nodejs

@@ -3,7 +3,7 @@
 
 The application uses IBM Watson [Personality Insights][pi_docs] and Twitter to find the celebrities that are similar to your personality. Twitter is being use to get the tweets for a given handler, the text from those tweets is send to Personality Insights, who analyze the text and reply with a personality profile. That profile is compared to celebrity profiles to find the most similar.
 
-Live demo: http://your-celebrity-match.mybluemix.net/
+Live demo: http://your-celebrity-match.ng.bluemix.net/
 
 Give it a try! Click the button below to fork into IBM DevOps Services and deploy your own copy of this application on Bluemix.  
 [![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/watson-developer-cloud/yourcelebritymatch)  
@@ -164,5 +164,5 @@ You need to copy `username`, `password`.
 [twitter_app]: https://apps.twitter.com/app/new
 [german_twitter]: https://twitter.com/germanatt
 [nathan_twitter]: https://twitter.com/nfriedly
-[pi_docs]: http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/personality-insights/
-[vcap_environment]: https://www.ibm.com/watson/developercloud/doc/common/getting-started-variables.html
+[pi_docs]: https://console.bluemix.net/docs/services/personality-insights/index.html
+[vcap_environment]: https://console.bluemix.net/docs/services/watson/getting-started-variables.html

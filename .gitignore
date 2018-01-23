@@ -6,3 +6,4 @@ TWITTER.json
 VCAP_SERVICES.json
 run.sh
 coverage
+.env

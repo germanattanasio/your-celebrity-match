@@ -16,6 +16,8 @@
 
 'use strict';
 
+require('dotenv').config()
+
 var app = require('../app');
 var request = require('supertest');
 

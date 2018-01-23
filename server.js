@@ -1,8 +1,10 @@
 #! /usr/bin/env node
 'use strict';
 
+require('dotenv').config()
+
 // Deployment tracking
-require("metrics-tracker-client").track();
+require('metrics-tracker-client').track();
 
 var server = require('./app');
 var port = process.env.PORT || process.env.VCAP_APP_PORT || 3000;

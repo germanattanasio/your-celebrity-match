@@ -11,5 +11,3 @@ applications:
   command: npm start
   path: .
   memory: 512M
-  env:
-    DEMO: 1

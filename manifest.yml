@@ -1,15 +1,5 @@
----
-declared-services:
-  personality-insights-service:
-    label: personality_insights
-    plan: tiered
-
 applications:
-- services:
-  - personality-insights-service
-  name: your-celebrity-match
+- name: your-celebrity-match
   command: npm start
   path: .
   memory: 512M
-  env:
-    DEMO: 1

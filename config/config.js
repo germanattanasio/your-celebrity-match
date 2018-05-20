@@ -22,9 +22,6 @@ module.exports = {
 
   // Personality Insights credentials
   personality_insights: {
-    url: '<url>',
-    username: '<username>',
-    password: '<password>',
     version: 'v2'
   },
 

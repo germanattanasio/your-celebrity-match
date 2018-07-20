@@ -1,6 +1,15 @@
-# your-celebrity-match
-[![Build Status](https://travis-ci.org/watson-developer-cloud/your-celebrity-match.svg?branch=master)](https://travis-ci.org/watson-developer-cloud/your-celebrity-match)
-
+<h1 align="center" style="border-bottom: none;">🚀 Your Celebrity Match</h1>
+<h3 align="center">Find celebrities who personality is similar to yours.
+</h3>
+<p align="center">
+  <a href="http://travis-ci.org/watson-developer-cloud/personality-insights-nodejs">
+    <img alt="Travis" src="https://travis-ci.org/watson-developer-cloud/personality-insights-nodejs.svg?branch=master">
+  </a>
+  <a href="#badge">
+    <img alt="semantic-release" src="https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg">
+  </a>
+</p>
+</p>
 The application uses IBM Watson [Personality Insights][pi_docs] and Twitter to find the celebrities that are similar to your personality. Twitter is being use to get the tweets for a given handler, the text from those tweets is send to Personality Insights, who analyze the text and reply with a personality profile. That profile is compared to celebrity profiles to find the most similar.
 
 Live demo: http://your-celebrity-match.ng.bluemix.net/
@@ -17,6 +26,18 @@ Steps |
 <img src="http://s7.postimg.org/ltvbrujbv/3_UM_api.gif" alt="Calls the Personality Insights API." width="100px" height="100px"><br> Calls the Personality Insights API to analyze the language in your tweets and apply it to a spectrum of characteristics.<br> |
 <img src="http://s7.postimg.org/nmy8g64ij/4_compare_results.gif" alt="Compares your Personality Insights profile to 232 celebrity profiles analyzed with the service." width="100px" height="100px"><br> Compares your Personality Insights profile to 232 celebrity profiles analyzed with the service.<br> |
 <img src="http://s7.postimg.org/we59afntn/5_celeb_match.png" alt="Sorts your matches and shows you the highest and lowest. These are calculated by the euclidean distance between the two." width="100px" height="100px"><br> Sorts your matches and shows you the highest and lowest. These are calculated by the euclidean distance between the two.<br> |
+
+## Prerequisites
+
+1. Sign up for an [IBM Cloud account](https://console.bluemix.net/registration/).
+1. Download the [IBM Cloud CLI](https://console.bluemix.net/docs/cli/index.html#overview).
+1. Create an instance of the Language Translator service and get your credentials:
+    - Go to the [Personality Insights](https://console.bluemix.net/catalog/services/personality-insights) page in the IBM Cloud Catalog.
+    - Log in to your IBM Cloud account.
+    - Click **Create**.
+    - Click **Show** to view the service credentials.
+    - Copy the `apikey` value, or copy the `username` and `password` values if your service instance doesn't provide an `apikey`.
+    - Copy the `url` value.
 
 
 ## Getting Started
@@ -61,6 +82,8 @@ This instructions will help you install the celebrities app in your local enviro
         url:      '<url>',
         username: '<username>',
         password: '<password>'
+        // If your credentials have an apikey field use
+        // iam_apikey: '<apikey>',
       },
 
       twitter: [{
@@ -91,37 +114,6 @@ This instructions will help you install the celebrities app in your local enviro
 	```
 	where `username` is the Twitter handle of the celebrity you would like to add.
 
-
-## Personality Insights Credentials
-The credentials for the services are stored in the [VCAP_SERVICES][vcap_environment] environment variable. In order to get them you need to first create and bind the service to your application.
-
-There are two ways to get the credentials, you can use Bluemix to access your app and view the `VCAP_SERVICES` there or you can run:
-
-```sh
-$ cf env <application-name>
-```
-
-Example output:
-
-```
-  System-Provided:
-  {
-  "VCAP_SERVICES": {
-    "personality_insights": [{
-        "credentials": {
-          "password": "<password>",
-          "url": "<url>",
-          "username": "<username>"
-        },
-      "label": "personality_insights",
-      "name": "personality-insights-service",
-      "plan": "tiered"
-   }]
-  }
-  }
-```
-
-You need to copy `username`, `password`.
 
 ## Celebrities
   The application comes with two 'celebrity' profiles: [@germanatt][german_twitter] and [@nfriedly][nathan_twitter]. If you want to add more profiles, you have two options:

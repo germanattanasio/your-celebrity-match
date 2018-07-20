@@ -22,7 +22,7 @@ module.exports = {
 
   // Personality Insights credentials
   personality_insights: {
-    version: 'v2'
+    version: 'v3'
   },
 
   // Twitter app credentials: https://apps.twitter.com/app

@@ -11,12 +11,15 @@ env:
   - BX_SPACE=demos
 before_deploy: npm install -g bx-blue-green
 deploy:
+- provider: script
   skip_cleanup: true
-  provider: script
   script:
   - bx-blue-green-travis
   on:
     branch: master
     repo: watson-developer-cloud/your-celebrity-match
-notifications:
-  email: false
+- provider: script
+  skip_cleanup: true
+  script: npx semantic-release
+  on:
+    node: 8

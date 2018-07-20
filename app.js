@@ -21,7 +21,7 @@ var express     = require('express'),
   app           = express(),
   config        = require('./config/config'),
   mongoose      = require('mongoose'),
-  watson        = require('watson-developer-cloud'),
+  PersonalityInsightsV3 = require('watson-developer-cloud/personality-insights/v3'),
   TwitterHelper = require('./app/util/twitter-helper');
 
 
@@ -54,7 +54,7 @@ require('./config/express')(app);
 var twit = new TwitterHelper(config.twitter);
 
 // Create the personality insights service
-var personality_insights = new watson.personality_insights(config.personality_insights);
+var personality_insights = new PersonalityInsightsV3(config.personality_insights);
 
 // Make the services accessible to the router
 app.use(function(req,res,next){

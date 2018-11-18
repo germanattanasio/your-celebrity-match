@@ -15,6 +15,12 @@
 
 'use strict';
 
+var types = {
+  'personality': 0,
+  'needs': 1,
+  'values': 2,
+};
+
 /**
  * Return the desired Traits normalized
  * @param  {tree}     JSON personality results object
@@ -23,11 +29,11 @@
  */
 var traits = function(tree, type) {
   var profile = typeof(tree) === 'string' ? JSON.parse(tree) : tree;
-  var _traits = profile.tree.children[type].children[0].children;
+  var _traits = profile[type] ? profile[type] : profile.tree.children[types[type]].children[0].children;
   return _traits.map(function(trait) {
     return {
       name: trait.name,
-      value: trait.percentage
+      value: trait['percentile'] || trait['percentage']
     };
   });
 };

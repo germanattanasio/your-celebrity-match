@@ -30,9 +30,9 @@ var celebs =[];
 var getCelebrityFromDB = Q.denodeify(Profile.find.bind(Profile));
 
 // Constants for types of profiles
-var PERSONALITY = 0,
-    NEEDS = 1,
-    VALUES = 2;
+var PERSONALITY = 'personality',
+    NEEDS = 'needs',
+    VALUES = 'values';
 
 /**
  * Updates an array with the celebrity profile pictures.

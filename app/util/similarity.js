@@ -14,6 +14,7 @@
  */
 
 'use strict';
+var flatten  = require('./flatten');
 
 /**
  * Return the euclidean distance between two profiles
@@ -25,13 +26,13 @@
 var similarity = function( /*object*/ origin, /*object*/ target, type) {
   origin = typeof(origin) === 'string' ? JSON.parse(origin) : origin;
   target = typeof(target) === 'string' ? JSON.parse(target) : target;
-  var distance = 0.0,
-    origin_traits = origin.tree.children[type].children[0].children,
-    target_traits = target.tree.children[type].children[0].children;
+  var distance = 0.0;
+  var origin_traits = flatten.traits(origin, type);
+  var target_traits = flatten.traits(target, type);
 
   // for each trait in origin personality...
   origin_traits.forEach(function(trait, i) {
-    distance += Math.pow(trait.percentage - target_traits[i].percentage, 2);
+    distance += Math.pow(trait.value - target_traits[i].value, 2);
   });
   var ret = 1 - (Math.sqrt(distance / origin_traits.length));
   return ret;

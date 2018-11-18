@@ -30,8 +30,6 @@ module.exports = function (app) {
   // 2. helmet with defaults
   app.use(helmet({ cacheControl: false }));
 
-  app.use(helmet.frameguard('allow-from', 'https://ibm-sxsw.mybluemix.net'));
-
   // 3. rate-limit to /api/
   app.use('/like/', rateLimit({
     windowMs: 30 * 1000, // seconds

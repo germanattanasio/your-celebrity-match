@@ -19,13 +19,11 @@ The application uses [The Personality Insights API](https://www.ibm.com/watson/d
 
 # How it works
 
-Steps |
-:------------: |
-<img src="http://s7.postimg.org/odqyly6vv/1_enter_handle.gif" alt="You input your Twitter handle" width="100px" height="100px"><br>You input your Twitter handle.<br> |
-<img src="http://s7.postimg.org/ag8sgn8t7/2_twitter_feed.gif" alt="Calls the Twitter API." width="100px" height="100px"><br> Calls the Twitter API to get the latest 2300 tweets from your public feed.<br> |
-<img src="http://s7.postimg.org/ltvbrujbv/3_UM_api.gif" alt="Calls the Personality Insights API." width="100px" height="100px"><br> Calls the Personality Insights API to analyze the language in your tweets and apply it to a spectrum of characteristics.<br> |
-<img src="http://s7.postimg.org/nmy8g64ij/4_compare_results.gif" alt="Compares your Personality Insights profile to 232 celebrity profiles analyzed with the service." width="100px" height="100px"><br> Compares your Personality Insights profile to 232 celebrity profiles analyzed with the service.<br> |
-<img src="http://s7.postimg.org/we59afntn/5_celeb_match.png" alt="Sorts your matches and shows you the highest and lowest. These are calculated by the euclidean distance between the two." width="100px" height="100px"><br> Sorts your matches and shows you the highest and lowest. These are calculated by the euclidean distance between the two.<br> |
+ 1. You input your Twitter handle.
+ 1. Calls the Twitter API to get the latest 2300 tweets from your public feed.
+ 1. Calls the Personality Insights API to analyze the language in your tweets and apply it to a spectrum of characteristics.
+ 1. Compares your Personality Insights profile to 232 celebrity profiles analyzed with the service.
+ 1. Sorts your matches and shows you the highest and lowest. These are calculated by the euclidean distance between the two.
 
 ## Prerequisites
 
@@ -45,31 +43,23 @@ Steps |
 This instructions will help you install the celebrities app in your local environment.
 
 1. Clone the repository with:
-
     ```sh
     $ git clone git@github.com:watson-developer-cloud/your-celebrity-match.git
     ```
-
-1. Install [node][node] (use v0.10.31)
-
+1. Install [node][node]
 1. Install [mongodb][mongodb]
-
 1. Install the npm modules:
-
     ```sh
     $ npm install
     ```
     **Note:** Make sure you are in the project directory, the `package.json` file should be visible.
-
 1. Start mongodb
-
     ```sh
     $ mongod
     ```
     (Run this in a separate terminal window)
-
-1. You need some credentials to use Twitter API, Personality Insights and MongoDC:
-  - Get credentials to use Personality Insights.  
+1. You need some credentials to use Twitter API, Personality Insights and MongoDB:
+  - Get credentials to use Personality Insights.
   - Create a **FREE** Mongodb database using [MongoLab](https://mlab.com/).  
   - Create a Twitter app and get the API credentials [here][twitter_app].
 1. Update the Twitter, MongoDB and Personality Insights credentials in `config/config.js`
@@ -79,11 +69,9 @@ This instructions will help you install the celebrities app in your local enviro
 
     {
       personality_insights: {
+        version: '2017-10-13',
         url:      '<url>',
-        username: '<username>',
-        password: '<password>'
-        // If your credentials have an apikey field use
-        // iam_apikey: '<apikey>',
+        iam_apikey: '<username>'s
       },
 
       twitter: [{
@@ -102,7 +90,6 @@ This instructions will help you install the celebrities app in your local enviro
     ```
 
 1. Update the database with the celebrities by making a **POST** request to:
-
     `http://localhost:3000/celebrities/syncdb`
 
     The celebrities are not added by default. Hence the above step is recommended. Refer #Celebrities section below for more information.
@@ -116,7 +103,7 @@ This instructions will help you install the celebrities app in your local enviro
 
 
 ## Celebrities
-  The application comes with two 'celebrity' profiles: [@germanatt][german_twitter] and [@nfriedly][nathan_twitter]. If you want to add more profiles, you have two options:
+  The application comes with 1 'celebrity' profile: [@germanatt][german_twitter]. If you want to add more profiles, you have two options:
 
 ### Auto-Lookup
 1. 	Choose a person on Twitter to include as a 'celebrity'. Ensure this person is verified, has at least 10,000 followers, and has over 1,000 tweets.
@@ -146,10 +133,9 @@ This instructions will help you install the celebrities app in your local enviro
   Find more open source projects on the [IBM Github Page](http://ibm.github.io/)
 
 [bluemix]: https://console.ng.bluemix.net/
-[node]: http://nodejs.org/download
+[node]: http://nodejs.org/
 [mongodb]: http://docs.mongodb.org/manual/installation/
 [twitter_app]: https://apps.twitter.com/app/new
 [german_twitter]: https://twitter.com/germanatt
-[nathan_twitter]: https://twitter.com/nfriedly
 [pi_docs]: https://console.bluemix.net/docs/services/personality-insights/index.html
 [vcap_environment]: https://console.bluemix.net/docs/services/watson/getting-started-variables.html

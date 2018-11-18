@@ -51,6 +51,6 @@
     "url": "https://github.com/watson-developer-cloud/your-celebrity-match.git"
   },
   "engines": {
-    "node": ">=6"
+    "node": ">=10"
   }
 }

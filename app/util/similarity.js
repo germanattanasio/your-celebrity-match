@@ -26,12 +26,12 @@ var similarity = function( /*object*/ origin, /*object*/ target, type) {
   origin = typeof(origin) === 'string' ? JSON.parse(origin) : origin;
   target = typeof(target) === 'string' ? JSON.parse(target) : target;
   var distance = 0.0,
-    origin_traits = origin.tree.children[type].children[0].children,
-    target_traits = target.tree.children[type].children[0].children;
+    origin_traits = origin[type],
+    target_traits = target[type];
 
   // for each trait in origin personality...
   origin_traits.forEach(function(trait, i) {
-    distance += Math.pow(trait.percentage - target_traits[i].percentage, 2);
+    distance += Math.pow(trait.percentile - target_traits[i].percentile, 2);
   });
   var ret = 1 - (Math.sqrt(distance / origin_traits.length));
   return ret;

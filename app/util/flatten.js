@@ -23,11 +23,11 @@
  */
 var traits = function(tree, type) {
   var profile = typeof(tree) === 'string' ? JSON.parse(tree) : tree;
-  var _traits = profile.tree.children[type].children[0].children;
+  var _traits = profile[type];
   return _traits.map(function(trait) {
     return {
       name: trait.name,
-      value: trait.percentage
+      value: trait.percentile
     };
   });
 };

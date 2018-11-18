@@ -30,4 +30,13 @@ describe('similarity', function() {
     assert.equal(1, similarity(origin, target, 'needs'))
     assert.equal(1, similarity(origin, target, 'values'))
   });
+
+  it('should return distance if profiles are from different API versions', function() {
+    var origin = JSON.parse(fs.readFileSync(path.join(__dirname,'..','profiles','14578997.json'), 'utf8'));
+    var target = JSON.parse(fs.readFileSync(path.join(__dirname,'..','profiles','1139651.json'), 'utf8'));
+    assert.equal(0.7025814861323696, similarity(origin, target, 'personality'))
+    assert.equal(0.4818150693033726, similarity(origin, target, 'needs'))
+    assert.equal(0.6608327405394706, similarity(origin, target, 'values'))
+  });
+
 });

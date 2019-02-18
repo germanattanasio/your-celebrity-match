@@ -15,6 +15,9 @@ The application uses IBM Watson [Personality Insights][pi_docs] and Twitter to f
 Live demo: http://your-celebrity-match.ng.bluemix.net/
 
 # API Reference:
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/watson-developer-cloud/your-celebrity-match.svg)](https://greenkeeper.io/)
+
 The application uses [The Personality Insights API](https://www.ibm.com/watson/developercloud/personality-insights/api/v2/)
 
 # How it works

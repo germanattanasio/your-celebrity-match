@@ -18,9 +18,9 @@
     "extend": "^3.0.2",
     "helmet": "^3.15.0",
     "jade": "^1.11.0",
-    "mongoose": "^4.13.17",
+    "mongoose": "^5.4.13",
     "q": "^2.0.3",
-    "twitter": "^0.2.13",
+    "twitter": "^1.7.1",
     "watson-developer-cloud": "^3.13.0"
   },
   "devDependencies": {
